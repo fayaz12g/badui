@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from './Theme';
+import uilogo from './baduilogo.png'
 
 export const MainMenu = ({ onStart }) => {
   const [visible, setVisible] = useState(true);
@@ -24,9 +25,10 @@ export const MainMenu = ({ onStart }) => {
       `}
       onClick={onStart}
     >
-      <h1 className="text-6xl font-bold text-white mb-8 text-center">
+      <img src={uilogo} alt="UI Logo" className="mb-8" />
+      {/* <h1 className="text-6xl font-bold text-white mb-8 text-center">
         UI Challenge
-      </h1>
+      </h1> */}
       <div className="text-2xl text-yellow-300 transition-opacity duration-300"
            style={{ opacity: visible ? 1 : 0 }}>
         Click Anywhere to Begin

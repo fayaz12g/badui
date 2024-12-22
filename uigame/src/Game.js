@@ -106,6 +106,17 @@ const WorldSelect = () => {
         flex flex-col items-center justify-center
         transition-colors duration-300
       `}>
+        <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+        <div className="flex flex-col items-center">
+          <span className="text-gray-700 dark:text-gray-300 mb-2">Main Menu</span>
+          <button 
+            className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex justify-center items-center hover:bg-gray-300 dark:hover:bg-gray-600"
+            onClick={() => setGameState('mainMenu')} // Go back to world select
+          >
+            <ArrowLeft className="text-gray-700 dark:text-gray-300 w-6 h-6" />
+          </button>
+        </div>
+      </div>
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
