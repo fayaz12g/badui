@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const SetAlarmLevel = ({ onComplete }) => {
+export const SetAlarmLevelPlus = ({ onComplete }) => {
   const [hours, setHours] = useState(1);
   const [minutes, setMinutes] = useState(0);
   const [ampm, setAmpm] = useState('AM');

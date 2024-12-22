@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export const ClickTrainingLevel2 = ({ onComplete }) => {
+export const ClickTrainingLevel2Plus = ({ onComplete }) => {
   const [clicks, setClicks] = useState(0);
   const [progress, setProgress] = useState(0); // Tracks how far the gradient has progressed
   const requiredClicks = 5;

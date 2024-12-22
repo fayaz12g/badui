@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const DeleteCommentLevel = ({ onComplete }) => {
+export const DeleteCommentLevelPlus = ({ onComplete }) => {
   const [comments, setComments] = useState(['wow so cute!']); // Initial comment
   const [inputValue, setInputValue] = useState('');
   const [likes, setLikes] = useState(0);

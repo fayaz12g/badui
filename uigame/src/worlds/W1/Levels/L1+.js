@@ -1,7 +1,7 @@
 // worlds/W1/levels/L1.js
 import React, { useState } from 'react';
 
-export const ClickTrainingLevel = ({ onComplete }) => {
+export const ClickTrainingLevelPlus = ({ onComplete }) => {
   const [clicks, setClicks] = useState(0);
   const requiredClicks = 10;
 

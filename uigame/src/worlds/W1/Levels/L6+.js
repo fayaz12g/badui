@@ -5,7 +5,7 @@ const shuffleArray = (array) => {
   return array.sort(() => Math.random() - 0.5);
 };
 
-export const DateOfBirthLevel = ({ onComplete }) => {
+export const DateOfBirthLevelPlus = ({ onComplete }) => {
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');

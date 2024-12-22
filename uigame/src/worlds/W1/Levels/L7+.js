@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const RidiculousCaptcha = ({ onComplete }) => {
+export const RidiculousCaptchaPlus = ({ onComplete }) => {
   const gridSize = 20; // 10x10 grid
   const totalBoxes = gridSize * gridSize;
   const [selectedBoxes, setSelectedBoxes] = useState([]);

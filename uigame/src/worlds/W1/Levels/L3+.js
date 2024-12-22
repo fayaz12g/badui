@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const MoneySliderLevel = ({ onComplete }) => {
+export const MoneySliderLevelPlus = ({ onComplete }) => {
   const [sliderValue, setSliderValue] = useState(0); // Value of the slider
   const maxAmount = 500;
   const targetAmount = 340.23;
