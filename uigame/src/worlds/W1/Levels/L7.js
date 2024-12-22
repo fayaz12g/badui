@@ -13,8 +13,8 @@ export const RidiculousCaptcha = ({ onComplete }) => {
       setSelectedBoxes([...selectedBoxes, index]);
     }
 
-    // If the user selects at least 50% of the boxes, complete the challenge
-    if (selectedBoxes.length + 1 >= totalBoxes / 2) {
+    // If the user selects at least 33% of the boxes, complete the challenge
+    if (selectedBoxes.length + 1 >= totalBoxes / 3) {
       onComplete();
     }
   };
@@ -24,7 +24,7 @@ export const RidiculousCaptcha = ({ onComplete }) => {
       <h3 className="text-2xl mb-4 text-gray-900 dark:text-white">
         Select all the boxes with a cat
       </h3>
-      <p>(Hint: It's a tricky one! Select at least 50% of the boxes)</p>
+      <p>(Hint: Select the boxes by clicking on them!)</p>
 
       <div className="relative inline-block">
         {/* Background image (the cat image) */}
@@ -58,9 +58,9 @@ export const RidiculousCaptcha = ({ onComplete }) => {
         </div>
       </div>
 
-      <p className="mt-4 text-lg">
+      {/* <p className="mt-4 text-lg">
         {`You have selected ${selectedBoxes.length} / ${totalBoxes} boxes`}
-      </p>
+      </p> */}
     </div>
   );
 };

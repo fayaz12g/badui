@@ -5,7 +5,7 @@ export const ClickTrainingLevel2 = ({ onComplete }) => {
   const [progress, setProgress] = useState(0); // Tracks how far the gradient has progressed
   const requiredClicks = 5;
   const fallbackSpeed = 1; // Speed at which the gradient falls back
-  const clickIncrement = 20; // How much the progress increases per click (adjust as needed)
+  const clickIncrement = 10; // How much the progress increases per click (adjust as needed)
   const buttonRef = useRef(null);
 
   useEffect(() => {
