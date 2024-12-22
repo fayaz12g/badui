@@ -40,8 +40,9 @@ export const GameContainer = () => {
     if (timeElapsed <= currentLevel.starThresholds.three) stars = 3;
     else if (timeElapsed <= currentLevel.starThresholds.two) stars = 2;
     else if (timeElapsed <= currentLevel.starThresholds.one) stars = 1;
-    if ((timeElapsed <= currentLevel.starThresholds.three) && currentLevel.mode == 'c') currentLevel.stars = 4;
-    if ((timeElapsed <= currentLevel.starThresholds.three) && currentLevel.mode == 'c') stars = 4;
+
+    // Instead of this, we need to make it turn the non plus variant into having 4 stars
+    if ((timeElapsed <= currentLevel.starThresholds.one) && currentLevel.mode == 'c') stars = 4;
 
     setEarnedStars(stars);
     setShowCompletion(true);
