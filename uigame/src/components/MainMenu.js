@@ -29,10 +29,13 @@ export const MainMenu = ({ onStart }) => {
       {/* <h1 className="text-6xl font-bold text-white mb-8 text-center">
         UI Challenge
       </h1> */}
-      <div className="text-2xl text-yellow-300 transition-opacity duration-300"
-           style={{ opacity: visible ? 1 : 0 }}>
+      <div 
+        className="text-4xl text-yellow-300 transition-opacity duration-300"
+        style={{ opacity: visible ? 1 : 0, fontFamily: 'Patrick Hand, cursive' }}
+      >
         Click Anywhere to Begin
       </div>
+
     </div>
   );
 };

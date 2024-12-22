@@ -44,11 +44,11 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="fixed bottom-4 right-4 p-2 rounded-full 
-                bg-gray-100 dark:bg-gray-800 
-                hover:bg-gray-200 dark:hover:bg-gray-700
-                transition-colors duration-300"
-    >
+      className={`fixed bottom-4 right-4 p-2 rounded-full  
+        ${theme === 'dark' 
+            ? 'bg-gray-700 hover:bg-gray-600' 
+            : 'bg-red-800 hover:bg-red-600'}
+        transition-colors duration-300"`}>
       {theme === 'dark' ? (
         <Sun className="w-6 h-6 text-yellow-500" />
       ) : (
