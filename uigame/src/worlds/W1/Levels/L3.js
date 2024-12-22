@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 export const MoneySliderLevel = ({ onComplete }) => {
   const [sliderValue, setSliderValue] = useState(0); // Value of the slider
-  const maxAmount = 500;
-  const targetAmount = 340.23;
+  const maxAmount = 100;
+  const targetAmount = 74.23;
   const threshold = 1; // Acceptable threshold for completing the level
 
   const handleSliderChange = (e) => {
@@ -26,7 +26,7 @@ export const MoneySliderLevel = ({ onComplete }) => {
         Send Money
       </h3>
       <p className="mb-8 text-gray-700 dark:text-gray-200 transition-colors duration-300">
-        Send the client $340.23. Hint: There's a $1 threshold.
+        Send the client $74.23. Hint: There's a $1 threshold.
       </p>
       <div className="mb-4 text-gray-700 dark:text-gray-200 transition-colors duration-300">
         Current Amount: ${sliderValue.toFixed(2)}
