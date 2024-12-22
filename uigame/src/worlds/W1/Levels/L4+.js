@@ -19,7 +19,7 @@ export const SetAlarmLevelPlus = ({ onComplete }) => {
     if (isHoursRunning) {
       interval = setInterval(() => {
         setHours((prev) => (prev % 12) + 1); // Loop between 1-12
-      }, 500); // Speed at which hours spin
+      }, 100); // Speed at which hours spin
     }
     return () => clearInterval(interval);
   }, [isHoursRunning]);
@@ -30,7 +30,7 @@ export const SetAlarmLevelPlus = ({ onComplete }) => {
     if (isMinutesRunning) {
       interval = setInterval(() => {
         setMinutes((prev) => (prev % 60) + 1); // Loop between 1-60
-      }, 500); // Speed at which minutes spin
+      }, 50); // Speed at which minutes spin
     }
     return () => clearInterval(interval);
   }, [isMinutesRunning]);
@@ -41,7 +41,7 @@ export const SetAlarmLevelPlus = ({ onComplete }) => {
     if (isAmpmRunning) {
       interval = setInterval(() => {
         setAmpm((prev) => (prev === 'AM' ? 'PM' : 'AM')); // Toggle between AM and PM
-      }, 500); // Speed at which AM/PM spins
+      }, 10); // Speed at which AM/PM spins
     }
     return () => clearInterval(interval);
   }, [isAmpmRunning]);
@@ -61,7 +61,7 @@ export const SetAlarmLevelPlus = ({ onComplete }) => {
         Set Alarm
       </h3>
       <p className="mb-8 text-gray-700 dark:text-gray-200 transition-colors duration-300">
-        Set the alarm for 7:30 AM by pressing start and stop for each field!
+        Set the alarm for 7:30 PM.
       </p>
 
       <div className="mb-4 text-gray-700 dark:text-gray-200 transition-colors duration-300">

@@ -61,7 +61,7 @@ export const SetAlarmLevel = ({ onComplete }) => {
         Set Alarm
       </h3>
       <p className="mb-8 text-gray-700 dark:text-gray-200 transition-colors duration-300">
-        Set the alarm for 7:30 AM by pressing start and stop for each field!
+        Set the alarm for 7:30 AM.
       </p>
 
       <div className="mb-4 text-gray-700 dark:text-gray-200 transition-colors duration-300">
