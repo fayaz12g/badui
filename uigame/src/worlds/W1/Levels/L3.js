@@ -26,7 +26,7 @@ export const MoneySliderLevel = ({ onComplete }) => {
         Send Money
       </h3>
       <p className="mb-8 text-gray-700 dark:text-gray-200 transition-colors duration-300">
-        Send the client $340.23. Drag the slider across the "Send" button to select the amount.
+        Send the client $340.23. Hint: There's a $1 threshold.
       </p>
       <div className="mb-4 text-gray-700 dark:text-gray-200 transition-colors duration-300">
         Current Amount: ${sliderValue.toFixed(2)}

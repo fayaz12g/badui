@@ -5,18 +5,26 @@ import { W2Levels } from './W2/W2Levels';
 export const worlds = [
   {
     id: 1,
-    name: "World 1: Basic Training",
-    description: "Learn the fundamentals",
+    name: "Fayaz's Levels",
+    description: "These are the fun ones.",
     levels: W1Levels,
     requiredStars: 0,
     isLocked: false
   },
   {
     id: 2,
-    name: "World 2: Advanced Challenges",
-    description: "Put your skills to the test",
+    name: "Chris's Levels",
+    description: "These will likely be easier!",
     levels: W2Levels,
-    requiredStars: 6,
+    requiredStars: 0,
+    isLocked: false
+  },
+  {
+    id: 3,
+    name: "Bonus Levels",
+    description: "We got guests to make these!",
+    levels: W2Levels, // CHange to W3 when made
+    requiredStars: 50,
     isLocked: true
   }
 ];

@@ -66,7 +66,7 @@ export const W1Levels = [
     description: "Delete your comment on a social media post.",
     component: DeleteCommentLevel,
     starThresholds: { one: 60, two: 30, three: 5 }, 
-    requiredStars: 7,
+    requiredStars: 10,
     worldId: 1,
     isLocked: true,
     mode: 'n'
@@ -77,7 +77,7 @@ export const W1Levels = [
     description: "Fill in your date of birth.",
     component: DateOfBirthLevel,
     starThresholds: { one: 30, two: 10, three: 5 },
-    requiredStars: 11,
+    requiredStars: 13,
     worldId: 1,
     isLocked: true,
     mode: 'n'
@@ -88,7 +88,7 @@ export const W1Levels = [
     description: "Select all the tiny boxes with a cat.",
     component: RidiculousCaptcha,
     starThresholds: { one: 90, two: 60, three: 30 },
-    requiredStars: 9,
+    requiredStars: 18,
     worldId: 1,
     isLocked: true,
     mode: 'n'

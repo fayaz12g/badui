@@ -2,42 +2,45 @@ import React, { useState, useEffect } from 'react';
 import { Star, Trophy, ArrowRight, RotateCcw } from 'lucide-react';
 
 export const CompletionOverlay = ({ 
-  timeElapsed, 
-  stars, 
-  levelData, 
-  onNext, 
-  onReplay, 
-  onMenu, 
-  nextLevel
-}) => {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    setShow(true);
-  }, []);
-
-  const nextStarThreshold = Object.entries(levelData.starThresholds)
-    .reverse()
-    .find(([_, threshold]) => timeElapsed > threshold);
-
-  const isChallengeMode = levelData.mode === 'c';
-  const oneStarThreshold = Object.entries(levelData.starThresholds).find(
-    ([_, threshold]) => threshold === Math.max(...Object.values(levelData.starThresholds))
-  );
-
-  return (
-    <div className={`
-      fixed inset-0 bg-black/50 backdrop-blur-sm
-      flex items-center justify-center
-      transition-opacity duration-500
-      ${show ? 'opacity-100' : 'opacity-0'}
-    `}>
+    timeElapsed, 
+    stars, 
+    levelData, 
+    onNext, 
+    onReplay, 
+    onMenu, 
+    nextLevel,
+    isNextLevelUnlocked,
+    requiredStars,
+    currentStars
+  }) => {
+    const [show, setShow] = useState(false);
+  
+    useEffect(() => {
+      setShow(true);
+    }, []);
+  
+    const nextStarThreshold = Object.entries(levelData.starThresholds)
+      .reverse()
+      .find(([_, threshold]) => timeElapsed > threshold);
+  
+    const isChallengeMode = levelData.mode === 'c';
+    const oneStarThreshold = Object.entries(levelData.starThresholds).find(
+      ([_, threshold]) => threshold === Math.max(...Object.values(levelData.starThresholds))
+    );
+  
+    return (
       <div className={`
-        bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full
-        transform transition-transform duration-500
-        ${show ? 'scale-100' : 'scale-90'}
-        shadow-xl
+        fixed inset-0 bg-black/50 backdrop-blur-sm
+        flex items-center justify-center
+        transition-opacity duration-500
+        ${show ? 'opacity-100' : 'opacity-0'}
       `}>
+        <div className={`
+          bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full
+          transform transition-transform duration-500
+          ${show ? 'scale-100' : 'scale-90'}
+          shadow-xl
+        `}>
         <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">
           Level Complete!
         </h2>
@@ -104,16 +107,25 @@ export const CompletionOverlay = ({
           
           <button
             onClick={onNext}
-            disabled={(!nextLevel)} // Disable button if next level is locked
+            disabled={!nextLevel || !isNextLevelUnlocked}
             className={`
               p-4 rounded-lg flex flex-col items-center gap-2 transition-colors
-            bg-blue-500 hover:bg-blue-600 text-white
+              ${!nextLevel || !isNextLevelUnlocked
+                ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }
             `}
           >
             <ArrowRight className="w-6 h-6" />
             <span className="text-sm">Next</span>
           </button>
         </div>
+
+        {nextLevel && !isNextLevelUnlocked && (
+          <p className="text-sm text-center mt-4 text-gray-600 dark:text-gray-400">
+            Need {requiredStars} stars to unlock next level (you have {currentStars})
+          </p>
+        )}
       </div>
     </div>
   );

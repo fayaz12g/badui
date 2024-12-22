@@ -6,22 +6,22 @@ import { ClickTrainingLevel2 } from './Levels/L2';
 export const W2Levels = [
     {
       id: "W2L1",
-      title: "Ridiculous Captcha",
+      title: "Chris's first level",
       description: "Find and click tiny boxes in a large image",
       component: ClickTrainingLevel, // Replace with actual level component
       starThresholds: { one: 60, two: 45, three: 30 },
-      requiredStars: 6, // Requires 6 stars from World 1
+      requiredStars: 0, // could require stars from World 1
       worldId: 2,
-      isLocked: true
+      isLocked: false
     },
     {
         id: "W1L2",
-        title: "Click Training 2",
+        title: "Chris's second level",
         description: "Learn the basics by clicking a button",
         component: ClickTrainingLevel2,
         starThresholds: { one: 10, two: 8, three: 3 },
-        requiredStars: 7,
-        worldId: 1,
+        requiredStars: 1,
+        worldId: 2,
         isLocked: true
       },
     // Add more levels for World 2
