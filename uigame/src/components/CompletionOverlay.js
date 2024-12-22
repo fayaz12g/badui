@@ -20,6 +20,11 @@ export const CompletionOverlay = ({
     .reverse()
     .find(([_, threshold]) => timeElapsed > threshold);
 
+  const isChallengeMode = levelData.mode === 'c';
+  const oneStarThreshold = Object.entries(levelData.starThresholds).find(
+    ([_, threshold]) => threshold === Math.max(...Object.values(levelData.starThresholds))
+  );
+
   return (
     <div className={`
       fixed inset-0 bg-black/50 backdrop-blur-sm
@@ -38,20 +43,38 @@ export const CompletionOverlay = ({
         </h2>
         
         <div className="flex justify-center mb-6 gap-2">
-          {[1, 2, 3].map((starNum) => (
+          {isChallengeMode ? (
+            // If it's challenge mode, only show one red star, or red outline if below threshold
             <Star
-              key={starNum}
-              className={`w-12 h-12 transition-all duration-300 delay-${starNum * 200}
-                ${starNum <= stars 
-                  ? 'text-yellow-500 fill-yellow-500 scale-110' 
-                  : 'text-gray-300'}`}
+              key="1"
+              className={`w-12 h-12 transition-all duration-300 
+                ${timeElapsed <= oneStarThreshold[1] 
+                  ? 'text-red-500 fill-red-500 scale-110' 
+                  : 'text-red-500' 
+                }`}
             />
-          ))}
+          ) : (
+            // Otherwise, show up to 3 stars
+            [1, 2, 3].map((starNum) => (
+              <Star
+                key={starNum}
+                className={`w-12 h-12 transition-all duration-300 delay-${starNum * 200}
+                  ${starNum <= stars 
+                    ? 'text-yellow-500 fill-yellow-500 scale-110' 
+                    : 'text-gray-300'}`}
+              />
+            ))
+          )}
         </div>
         
         <div className="text-center mb-6 dark:text-gray-200">
           <p className="text-xl mb-2">Time: {timeElapsed}s</p>
-          {nextStarThreshold && (
+          {isChallengeMode && oneStarThreshold && (
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Complete in {oneStarThreshold[1]}s for a red star!
+            </p>
+          )}
+          {nextStarThreshold && !isChallengeMode && (
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Complete in {nextStarThreshold[1]}s for {nextStarThreshold[0].replace('one', '1').replace('two', '2').replace('three', '3')} stars!
             </p>
