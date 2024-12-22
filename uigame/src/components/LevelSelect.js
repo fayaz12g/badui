@@ -45,9 +45,12 @@ export const LevelSelect = () => {
         <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
           <div className="flex flex-col items-center">
             <span className="text-gray-700 dark:text-gray-300 mb-2">World Select</span>
-            <button 
-              className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex justify-center items-center hover:bg-gray-300 dark:hover:bg-gray-600"
-              onClick={() => setGameState('worldSelect')}
+            <button
+            className={`w-12 h-12 rounded-full flex justify-center items-center
+                ${theme === 'dark' 
+                ? 'bg-gray-700 hover:bg-gray-800' 
+                : 'bg-red-700 hover:bg-red-950'}`}
+            onClick={() => setGameState('worldSelect')}
             >
               <ArrowLeft className="text-gray-700 dark:text-gray-300 w-6 h-6" />
             </button>
@@ -83,9 +86,12 @@ export const LevelSelect = () => {
                   key={level.id}
                   className={`rounded-lg shadow-lg p-6 ${
                     isLevelLocked 
-                      ? 'bg-gray-300 dark:bg-gray-700' 
-                      : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700'
-                  } transition-colors duration-200`}
+                    ? `${theme === 'dark' ? 'bg-gray-900' : 'bg-red-900'}` 
+                    : `${theme === 'dark' 
+                        ? 'bg-gray-800 hover:bg-gray-700' 
+                        : 'bg-red-600 hover:bg-red-950'} cursor-pointer`}
+                transition-colors duration-200`}
+
                   onClick={() => {
                     if (!isLevelLocked && !hasChallengeMode) {
                       handleLevelSelect(level);
@@ -145,7 +151,11 @@ export const LevelSelect = () => {
                       ) : (
                         hasChallengeMode ? (
                           <button
-                            className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                            className={`w-full py-2 
+                                ${theme === 'dark' 
+                                    ? 'bg-blue-700 hover:bg-blue-600' 
+                                    : 'bg-red-800 hover:bg-red-500'}
+                                text-white rounded-lg`}
                             onClick={(e) => handleLevelSelect(challengeLevel, e)}
                           >
                             Challenge Mode

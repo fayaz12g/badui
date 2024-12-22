@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Trophy, ArrowRight, RotateCcw } from 'lucide-react';
+import { useTheme } from './Theme';
 
 export const CompletionOverlay = ({ 
     timeElapsed, 
@@ -14,7 +15,8 @@ export const CompletionOverlay = ({
     currentStars
   }) => {
     const [show, setShow] = useState(false);
-  
+    const { theme, setTheme } = useTheme();
+    
     useEffect(() => {
       setShow(true);
     }, []);
@@ -36,7 +38,10 @@ export const CompletionOverlay = ({
         ${show ? 'opacity-100' : 'opacity-0'}
       `}>
         <div className={`
-          bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full
+          ${theme === 'dark' 
+            ? 'bg-gradient-to-b from-gray-700 to-gray-800' 
+            : 'bg-gradient-to-b from-red-700 to-red-800'}
+             rounded-lg p-8 max-w-md w-full
           transform transition-transform duration-500
           ${show ? 'scale-100' : 'scale-90'}
           shadow-xl
@@ -87,20 +92,26 @@ export const CompletionOverlay = ({
         <div className="grid grid-cols-3 gap-4">
           <button
             onClick={onMenu}
-            className="p-4 rounded-lg bg-gray-100 hover:bg-gray-200 
-                     dark:bg-gray-700 dark:hover:bg-gray-600
-                     flex flex-col items-center gap-2 transition-colors"
-          >
+            className={`
+                p-4 rounded-lg 
+                ${theme === 'dark' 
+                  ? 'bg-gray-700 hover:bg-gray-600' 
+                  : 'bg-red-600 hover:bg-red-500'}
+                flex flex-col items-center gap-2 transition-colors
+              `}> 
             <Trophy className="w-6 h-6 dark:text-gray-200" />
             <span className="text-sm dark:text-gray-200">Levels</span>
           </button>
           
           <button
             onClick={onReplay}
-            className="p-4 rounded-lg bg-gray-100 hover:bg-gray-200 
-                     dark:bg-gray-700 dark:hover:bg-gray-600
-                     flex flex-col items-center gap-2 transition-colors"
-          >
+            className={`
+                p-4 rounded-lg 
+                ${theme === 'dark' 
+                  ? 'bg-gray-700 hover:bg-gray-600' 
+                  : 'bg-red-600 hover:bg-red-500'}
+                flex flex-col items-center gap-2 transition-colors
+              `}>              
             <RotateCcw className="w-6 h-6 dark:text-gray-200" />
             <span className="text-sm dark:text-gray-200">Retry</span>
           </button>

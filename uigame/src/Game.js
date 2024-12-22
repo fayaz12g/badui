@@ -95,7 +95,7 @@ const Game = () => {
 // World Select Component
 const WorldSelect = () => {
   const { gameWorlds, setCurrentWorld, setGameState, totalStars } = useContext(GameContext);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, color } = useTheme();
 
   return (
     <div className={`
@@ -109,10 +109,13 @@ const WorldSelect = () => {
         <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
         <div className="flex flex-col items-center">
           <span className="text-gray-700 dark:text-gray-300 mb-2">Main Menu</span>
-          <button 
-            className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex justify-center items-center hover:bg-gray-300 dark:hover:bg-gray-600"
-            onClick={() => setGameState('mainMenu')} // Go back to world select
-          >
+          <button
+            className={`w-12 h-12 rounded-full flex justify-center items-center
+                ${theme === 'dark' 
+                ? 'bg-gray-700 hover:bg-gray-800' 
+                : 'bg-red-700 hover:bg-red-950'}`}
+            onClick={() => setGameState('mainMenu')}
+            >
             <ArrowLeft className="text-gray-700 dark:text-gray-300 w-6 h-6" />
           </button>
         </div>
@@ -137,10 +140,12 @@ const WorldSelect = () => {
               className={`
                 rounded-lg shadow-lg p-6
                 ${world.isLocked 
-                  ? 'bg-gray-300 dark:bg-gray-700' 
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer'}
+                    ? `${theme === 'dark' ? 'bg-gray-900' : 'bg-red-900'}` 
+                    : `${theme === 'dark' 
+                        ? 'bg-gray-800 hover:bg-gray-700' 
+                        : 'bg-red-600 hover:bg-red-950'} cursor-pointer`}
                 transition-colors duration-200
-              `}
+                `}
               onClick={() => {
                 if (!world.isLocked) {
                   setCurrentWorld(world);

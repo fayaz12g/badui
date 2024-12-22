@@ -89,7 +89,7 @@ export const GameContainer = () => {
         <div className={`p-4 
         ${theme === 'dark' 
             ? 'bg-white dark:bg-gray-800' 
-            : 'bg-gradient-to-b from-red-500 to-red-950'}
+            : 'bg-gradient-to-b from-red-500 to-red-850'}
              shadow-md flex justify-between items-center`}>
           <div className="flex items-center gap-4">
             <button
