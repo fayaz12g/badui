@@ -5,6 +5,10 @@ import { SetAlarmLevel } from './Levels/L4';
 import { DeleteCommentLevel } from './Levels/L5';  
 import { DateOfBirthLevel } from './Levels/L6';  
 import { RidiculousCaptcha } from './Levels/L7';  
+import SettingsMazeLevel from './Levels/L8';  
+import OnScreenKeyboardLevel from './Levels/L9';
+import CrazyCalculatorLevel from './Levels/L10';
+import FontSizeChallengeLevel from './Levels/L11';
 
 // Challenge Levels
 import { ClickTrainingLevelPlus } from './Levels/L1+';
@@ -14,6 +18,10 @@ import { SetAlarmLevelPlus } from './Levels/L4+';
 import { DeleteCommentLevelPlus } from './Levels/L5+';  
 import { DateOfBirthLevelPlus } from './Levels/L6+';  
 import { RidiculousCaptchaPlus } from './Levels/L7+';  
+import SettingsMazeLevelPlus from './Levels/L8+';  
+import OnScreenKeyboardLevelPlus from './Levels/L9+';
+import CrazyCalculatorLevelPlus from './Levels/L10+';
+import FontSizeChallengeLevelPlus from './Levels/L11+';
 
 export const W1Levels = [
   {
@@ -77,7 +85,7 @@ export const W1Levels = [
     description: "Fill in your date of birth.",
     component: DateOfBirthLevel,
     starThresholds: { one: 30, two: 10, three: 5 },
-    requiredStars: 13,
+    requiredStars: 12,
     worldId: 1,
     isLocked: true,
     mode: 'n'
@@ -88,7 +96,51 @@ export const W1Levels = [
     description: "Select all the tiny boxes with a cat.",
     component: RidiculousCaptcha,
     starThresholds: { one: 90, two: 60, three: 30 },
+    requiredStars: 14,
+    worldId: 1,
+    isLocked: true,
+    mode: 'n'
+  },
+  {
+    id: "W1L8",
+    title: "Phone Settings",
+    description: "Turn off blutooth.",
+    component: SettingsMazeLevel,
+    starThresholds: { one: 30, two: 20, three: 10 },
+    requiredStars: 16,
+    worldId: 1,
+    isLocked: true,
+    mode: 'n'
+  },
+  {
+    id: "W1L9",
+    title: "Log In",
+    description: "Login to your social media account.",
+    component: OnScreenKeyboardLevel,
+    starThresholds: { one: 60, two: 45, three: 20 },
     requiredStars: 18,
+    worldId: 1,
+    isLocked: true,
+    mode: 'n'
+  },
+  {
+    id: "W1L10",
+    title: "Crazy Calculator",
+    description: "Calculate some numbers.",
+    component: CrazyCalculatorLevel,
+    starThresholds: { one: 60, two: 30, three: 3 },
+    requiredStars: 20,
+    worldId: 1,
+    isLocked: true,
+    mode: 'n'
+  },
+  {
+    id: "W1L11",
+    title: "E-Reader Font",
+    description: "Change the font size on the e-reader.",
+    component: FontSizeChallengeLevel,
+    starThresholds: { one: 90, two: 60, three: 30 },
+    requiredStars: 35,
     worldId: 1,
     isLocked: true,
     mode: 'n'
@@ -166,6 +218,50 @@ export const W1Levels = [
     component: RidiculousCaptchaPlus,
     starThresholds: { one: 15, two: 0, three: 0 },
     requiredStars: 9,
+    worldId: 1,
+    isLocked: true,
+    mode: 'c'
+  },
+  {
+    id: "W1L8+",
+    title: "[CHALLENGE] Phone Settings",
+    description: "Turn off blutooth.",
+    component: SettingsMazeLevelPlus,
+    starThresholds: { one: 5, two: 0, three: 0 },
+    requiredStars: 16,
+    worldId: 1,
+    isLocked: true,
+    mode: 'c'
+  },
+  {
+    id: "W1L9+",
+    title: "[CHALLENGE] Log In",
+    description: "Login to your social media account.",
+    component: OnScreenKeyboardLevelPlus,
+    starThresholds: { one: 20, two: 0, three: 0 },
+    requiredStars: 18,
+    worldId: 1,
+    isLocked: true,
+    mode: 'c'
+  },
+  {
+    id: "W1L10+",
+    title: "[CHALLENGE] Crazy Calculator",
+    description: "Calculate some numbers.",
+    component: CrazyCalculatorLevelPlus,
+    starThresholds: { one: 3, two: 0, three: 0 },
+    requiredStars: 20,
+    worldId: 1,
+    isLocked: true,
+    mode: 'c'
+  },
+  {
+    id: "W1L11+",
+    title: "[CHALLENGE] E-Reader Font",
+    description: "Change the font size on the e-reader.",
+    component: FontSizeChallengeLevelPlus,
+    starThresholds: { one: 10, two: 0, three: 0 },
+    requiredStars: 35,
     worldId: 1,
     isLocked: true,
     mode: 'c'
