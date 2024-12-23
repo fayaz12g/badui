@@ -82,14 +82,20 @@ export const GameContainer = () => {
     if (!currentLevel) return null;
   
     return (
-      <div className={`min-h-screen 
+      <div className={`
+        min-h-screen 
         ${theme === 'dark' 
             ? 'bg-gradient-to-b from-gray-900 to-gray-800' 
-            : 'bg-gradient-to-b from-red-600 to-red-950'}`}>
+            : currentWorld.id === 2 
+                ? 'bg-gradient-to-b from-orange-500 to-orange-800' 
+                : 'bg-gradient-to-b from-red-600 to-red-950'}
+    `}>    
         <div className={`p-4 
         ${theme === 'dark' 
             ? 'bg-white dark:bg-gray-800' 
-            : 'bg-gradient-to-b from-red-500 to-red-850'}
+            : currentWorld.id === 2 
+                ? 'bg-gradient-to-b from-orange-500 to-orange-700' 
+                : 'bg-gradient-to-b from-red-500 to-red-850'}
              shadow-md flex justify-between items-center`}>
           <div className="flex items-center gap-4">
             <button
