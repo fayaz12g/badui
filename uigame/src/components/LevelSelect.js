@@ -92,19 +92,19 @@ export const LevelSelect = () => {
                   className={`rounded-lg shadow-lg p-6 ${
                     isLevelLocked 
                         ? `${theme === 'dark' 
-                            ? 'bg-gray-900' 
+                            ? 'bg-gray-900 cursor-not-allowed' 
                             : currentWorld.id === 2 
-                                ? 'bg-orange-900' 
-                                : 'bg-red-900'}`
+                                ? 'bg-orange-900 cursor-not-allowed' 
+                                : 'bg-red-900 cursor-not-allowed'}` 
                         : `${theme === 'dark' 
                             ? currentWorld.id === 2 
-                                ? 'bg-orange-800 hover:bg-orange-900' 
-                                : 'bg-gray-800 hover:bg-gray-700' 
+                                ? 'cursor-pointer bg-orange-800 hover:bg-orange-900' 
+                                : 'cursor-pointer bg-gray-800 hover:bg-gray-700' 
                             : currentWorld.id === 2 
-                                ? 'bg-orange-600 hover:bg-orange-900' 
-                                : 'bg-red-600 hover:bg-red-950'}`
+                                ? 'cursor-pointer bg-orange-600 hover:bg-orange-900' 
+                                : 'cursor-pointer bg-red-600 hover:bg-red-950'}`
                 }
-                cursor-pointer transition-colors duration-200`}
+                 transition-colors duration-200`}
                        
 
                   onClick={() => {
@@ -151,7 +151,7 @@ export const LevelSelect = () => {
                       {hasCompletedChallenge ? (
                         <>
                           <button
-                            className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                            className="w-full py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
                             onClick={(e) => handleLevelSelect(level, e)}
                           >
                             Replay Level
@@ -165,16 +165,24 @@ export const LevelSelect = () => {
                         </>
                       ) : (
                         hasChallengeMode ? (
+                          <>
+                          <button
+                            className="w-full py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                            onClick={(e) => handleLevelSelect(level, e)}
+                          >
+                            Replay Level
+                          </button>
                           <button
                             className={`w-full py-2 
                                 ${theme === 'dark' 
-                                    ? 'bg-blue-700 hover:bg-blue-600' 
-                                    : 'bg-red-800 hover:bg-red-500'}
+                                    ? 'bg-red-700 hover:bg-red-600' 
+                                    : 'bg-red-800 hover:bg-red-600'}
                                 text-white rounded-lg`}
                             onClick={(e) => handleLevelSelect(challengeLevel, e)}
                           >
-                            Challenge Mode
+                            Attempt Challenge
                           </button>
+                          </>
                         ) : (
                           <div className="text-sm text-gray-500 dark:text-gray-400">
                             <div>3 ★: Complete in {level.starThresholds.three}s</div>
