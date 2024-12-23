@@ -35,21 +35,26 @@ export const LevelSelect = () => {
   
     return (
       <div className={`
-          min-h-screen cursor-pointer
-          ${theme === 'dark' 
+        min-h-screen 
+        ${theme === 'dark' 
             ? 'bg-gradient-to-b from-gray-900 to-gray-800' 
-            : 'bg-gradient-to-b from-red-600 to-red-950'}
-          flex flex-col items-center justify-center
-          transition-colors duration-300
-        `}>
+            : currentWorld.id === 2 
+                ? 'bg-gradient-to-b from-orange-500 to-orange-800' 
+                : 'bg-gradient-to-b from-red-600 to-red-950'}
+        flex flex-col items-center justify-center
+        transition-colors duration-300
+    `}>    
         <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
           <div className="flex flex-col items-center">
             <span className="text-gray-700 dark:text-gray-300 mb-2">World Select</span>
             <button
             className={`w-12 h-12 rounded-full flex justify-center items-center
-                ${theme === 'dark' 
-                ? 'bg-gray-700 hover:bg-gray-800' 
-                : 'bg-red-700 hover:bg-red-950'}`}
+              ${theme === 'dark' 
+                  ? 'bg-gray-700 hover:bg-gray-800' 
+                  : currentWorld.id === 2 
+                      ? 'bg-orange-700 hover:bg-orange-950' 
+                      : 'bg-red-700 hover:bg-red-950'}
+          `}          
             onClick={() => setGameState('worldSelect')}
             >
               <ArrowLeft className="text-gray-700 dark:text-gray-300 w-6 h-6" />
@@ -86,11 +91,21 @@ export const LevelSelect = () => {
                   key={level.id}
                   className={`rounded-lg shadow-lg p-6 ${
                     isLevelLocked 
-                    ? `${theme === 'dark' ? 'bg-gray-900' : 'bg-red-900'}` 
-                    : `${theme === 'dark' 
-                        ? 'bg-gray-800 hover:bg-gray-700' 
-                        : 'bg-red-600 hover:bg-red-950'} cursor-pointer`}
-                transition-colors duration-200`}
+                        ? `${theme === 'dark' 
+                            ? 'bg-gray-900' 
+                            : currentWorld.id === 2 
+                                ? 'bg-orange-900' 
+                                : 'bg-red-900'}`
+                        : `${theme === 'dark' 
+                            ? currentWorld.id === 2 
+                                ? 'bg-orange-800 hover:bg-orange-900' 
+                                : 'bg-gray-800 hover:bg-gray-700' 
+                            : currentWorld.id === 2 
+                                ? 'bg-orange-600 hover:bg-orange-900' 
+                                : 'bg-red-600 hover:bg-red-950'}`
+                }
+                cursor-pointer transition-colors duration-200`}
+                       
 
                   onClick={() => {
                     if (!isLevelLocked && !hasChallengeMode) {

@@ -99,7 +99,7 @@ const WorldSelect = () => {
 
   return (
     <div className={`
-        min-h-screen cursor-pointer
+        min-h-screen
         ${theme === 'dark' 
           ? 'bg-gradient-to-b from-gray-900 to-gray-800' 
           : 'bg-gradient-to-b from-red-600 to-red-950'}
@@ -125,7 +125,7 @@ const WorldSelect = () => {
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
             Select World
           </h1>
-          <div className="flex items-center gap-2">
+          <div className="absolute top-10 right-10 flex items-center gap-2">
             <Trophy className="text-yellow-500" />
             <span className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
               {totalStars} Stars
@@ -143,9 +143,13 @@ const WorldSelect = () => {
                     ? `${theme === 'dark' ? 'bg-gray-900' : 'bg-red-900'}` 
                     : `${theme === 'dark' 
                         ? 'bg-gray-800 hover:bg-gray-700' 
-                        : 'bg-red-600 hover:bg-red-950'} cursor-pointer`}
-                transition-colors duration-200
-                `}
+                        : world.id === 2 
+                            ? 'bg-orange-600 hover:bg-orange-900' 
+                            : 'bg-red-600 hover:bg-red-950'}`
+                }
+                cursor-pointer transition-colors duration-200
+            `}
+            
               onClick={() => {
                 if (!world.isLocked) {
                   setCurrentWorld(world);
