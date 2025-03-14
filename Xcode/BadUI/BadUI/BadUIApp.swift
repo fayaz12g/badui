@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct BadUIApp: App {
+    @StateObject var gameManager = GameManager()
+    @StateObject var themeManager = ThemeManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GameView()
+                .environmentObject(gameManager)
+                .environmentObject(themeManager)
+                .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
         }
     }
 }
