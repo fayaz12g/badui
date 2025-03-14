@@ -27,9 +27,14 @@ struct GameView: View {
                 case .levelSelect:
                     LevelSelectView()
                 case .playing:
-                    if let level = gameManager.currentLevel {
-                        level.view
+                    if gameManager.gameState == .playing {
+                        if let level = gameManager.currentLevel {
+                            level.view
+                        }
                     }
+                
+                case .levelComplete:
+                    CompletionOverlay()
                 }
             }
             .transition(.opacity)

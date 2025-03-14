@@ -7,19 +7,24 @@
 
 import SwiftUI
 
-struct DeleteCommentLevel: View {
-    let onComplete: () -> Void
+struct DeleteCommentLevelPlus: View {
+    let onComplete: (Int) -> Void
     @State private var comments = ["wow so cute!"]
     @State private var newComment = ""
     @State private var likes = 0
     @State private var isLiked = false
     @State private var showTerms = false
+    @State private var timeElapsed = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
             Text("Fake Social Media Post")
                 .font(.title)
                 .padding()
+            
+            Text("Time: \(timeElapsed)s")
+                .font(.headline)
             
             Image("cat")
                 .resizable()
@@ -68,6 +73,9 @@ struct DeleteCommentLevel: View {
             }
         }
         .padding()
+        .onReceive(timer) { _ in
+            timeElapsed += 1
+        }
     }
     
     private func handleComment() {
@@ -77,7 +85,8 @@ struct DeleteCommentLevel: View {
         if !duplicates.isEmpty {
             comments.removeAll { $0 == newComment }
             if comments.isEmpty {
-                onComplete()
+                timer.upstream.connect().cancel()
+                onComplete(timeElapsed)
             }
         } else {
             comments.append(newComment)
@@ -96,7 +105,7 @@ struct TermsView: View {
                 .padding()
             
             ScrollView {
-                Text(longTermsText)
+                Text("longTermsTextVar")
                     .padding()
             }
             

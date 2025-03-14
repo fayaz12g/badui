@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SettingsMazeLevel: View {
-    let onComplete: () -> Void
+    let onComplete: (Int) -> Void
     @State private var currentScreen: Screen = .main
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var settings = Settings()
     @State private var hasScrolledEula = false
+    @State private var timeElapsed = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     enum Screen {
         case main, privacy, eula, bluetooth, battery
@@ -35,6 +37,7 @@ struct SettingsMazeLevel: View {
                     batterySettings
                 }
             }
+            .onReceive(timer) { _ in timeElapsed += 1 }
             .navigationBarTitleDisplayMode(.inline)
             .alert("Error", isPresented: $showAlert) {
                 Button("OK") { }
@@ -75,7 +78,8 @@ struct SettingsMazeLevel: View {
             if settings.bluetooth {
                 Button("Speaker") {
                     if settings.bluetooth {
-                        onComplete()
+                        timer.upstream.connect().cancel()
+                        onComplete(timeElapsed)
                     } else {
                         showAlert(message: "Enable Bluetooth first")
                     }

@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-struct FontSizeChallengeLevel: View {
-    let onComplete: () -> Void
+struct FontSizeChallengeLevelPlus: View {
+    let onComplete: (Int) -> Void
+    @State private var timeElapsed = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var fontSize: CGFloat = 10
     @State private var sliderRangeIndex = 0
     @State private var sliderValue: Double = 1
@@ -50,7 +52,7 @@ struct FontSizeChallengeLevel: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .onChange(of: sliderRangeIndex) { _ in
+                .onChange(of: sliderRangeIndex) { _, newValue in
                     sliderValue = currentRange[0]
                     fontSize = CGFloat(currentRange[0])
                 }
@@ -84,13 +86,15 @@ struct FontSizeChallengeLevel: View {
             
             Button("Check Font Size") {
                 if sliderValue == 20 {
-                    onComplete()
+                    timer.upstream.connect().cancel()
+                    onComplete(timeElapsed)
                 } else {
                     errorMessage = "Font size is not correct! Try adjusting the sliders."
                 }
             }
             .buttonStyle(PrimaryButtonStyle())
         }
+        .onReceive(timer) { _ in timeElapsed += 1 }
         .padding()
         .onAppear {
             // Randomize initial range

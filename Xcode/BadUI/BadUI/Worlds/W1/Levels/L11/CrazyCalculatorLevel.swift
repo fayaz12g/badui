@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CrazyCalculatorLevel: View {
-    let onComplete: () -> Void
+    let onComplete: (Int) -> Void
+    @State private var timeElapsed = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var display = ""
     @State private var result = ""
     @State private var errorMessage = ""
@@ -64,6 +66,7 @@ struct CrazyCalculatorLevel: View {
             }
             .buttonStyle(PrimaryButtonStyle())
         }
+        .onReceive(timer) { _ in timeElapsed += 1 }
         .padding()
     }
     
@@ -96,7 +99,8 @@ struct CrazyCalculatorLevel: View {
             }
             
             if value == 8 {
-                onComplete()
+                timer.upstream.connect().cancel()
+                onComplete(timeElapsed)
             }
             
             result = numberToWord(value)

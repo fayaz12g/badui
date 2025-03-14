@@ -1,5 +1,5 @@
 //
-//  LevelCard.swift
+//  WorldCard.swift
 //  BadUI
 //
 //  Created by Fayaz Shaikh on 3/14/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LevelCard: View {
+struct WorldCard: View {
     let level: Level
     @EnvironmentObject var gameManager: GameManager
     

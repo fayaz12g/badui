@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-struct CrazyCalculatorLevel: View {
-    let onComplete: () -> Void
+struct CrazyCalculatorLevelPlus: View {
+    let onComplete: (Int) -> Void
+    @State private var timeElapsed = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var display = ""
     @State private var result = ""
     @State private var errorMessage = ""
@@ -64,6 +66,7 @@ struct CrazyCalculatorLevel: View {
             }
             .buttonStyle(PrimaryButtonStyle())
         }
+        .onReceive(timer) { _ in timeElapsed += 1 }
         .padding()
     }
     
@@ -96,7 +99,8 @@ struct CrazyCalculatorLevel: View {
             }
             
             if value == 8 {
-                onComplete()
+                timer.upstream.connect().cancel()
+                onComplete(timeElapsed)
             }
             
             result = numberToWord(value)
@@ -112,31 +116,3 @@ struct CrazyCalculatorLevel: View {
     }
 }
 
-struct CalculatorButton: View {
-    let title: String
-    let action: (String) -> Void
-    
-    var body: some View {
-        Button(action: { action(title) }) {
-            Text(title == "C" ? "Del" : title)
-                .font(.title)
-                .frame(width: 70, height: 70)
-                .background(buttonColor)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-        }
-        .buttonStyle(PlainButtonStyle())
-    }
-    
-    private var buttonColor: Color {
-        switch title {
-        case "C": return .red
-        case "+", "-", "×", "÷", "^": return .orange
-        default: return .blue
-        }
-    }
-}
-
-enum CalculatorError: Error {
-    case invalidExpression
-}

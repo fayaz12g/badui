@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ClickTrainingLevel2: View {
-    let onComplete: () -> Void
+    let onComplete: (Int) -> Void
     @State private var clicks = 0
     @State private var progress: CGFloat = 0
+    @State private var timeElapsed = 0
     private let requiredClicks = 5
     private let fallbackSpeed: CGFloat = 4
     private let clickIncrement: CGFloat = 20
-    private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    private let progressTimer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    private let gameTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -28,6 +30,9 @@ struct ClickTrainingLevel2: View {
             
             Text("Progress: \(Int(min(progress, 100)))%")
                 .padding()
+            
+            Text("Time: \(timeElapsed)s")
+                .font(.headline)
             
             Button(action: handleClick) {
                 Text("Click Me!")
@@ -53,14 +58,22 @@ struct ClickTrainingLevel2: View {
             }
             .buttonStyle(PlainButtonStyle())
         }
-        .onReceive(timer) { _ in
+        .padding()
+        .onReceive(progressTimer) { _ in
             withAnimation {
                 progress = max(progress - fallbackSpeed, 0)
             }
         }
-        .onChange(of: progress) { newValue in
+        .onReceive(gameTimer) { _ in
+            if progress < 100 {
+                timeElapsed += 1
+            }
+        }
+        .onChange(of: progress) { _, newValue in
             if newValue >= 100 {
-                onComplete()
+                progressTimer.upstream.connect().cancel()
+                gameTimer.upstream.connect().cancel()
+                onComplete(timeElapsed)
             }
         }
     }

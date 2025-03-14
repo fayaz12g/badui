@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct ClickTrainingLevel: View {
-    let onComplete: () -> Void
+struct ClickTrainingLevelPlus: View {
+    let onComplete: (Int) -> Void  
     @State private var clicks = 0
+    @State private var timeElapsed = 0
     private let requiredClicks = 5
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -26,6 +28,10 @@ struct ClickTrainingLevel: View {
                 .font(.title2)
                 .padding()
             
+            Text("Time: \(timeElapsed)s")
+                .font(.headline)
+                .padding()
+            
             Button(action: handleClick) {
                 Text("Click Me!")
                     .font(.title)
@@ -38,12 +44,22 @@ struct ClickTrainingLevel: View {
             }
         }
         .padding()
+        .onReceive(timer) { _ in
+            if clicks < requiredClicks {
+                timeElapsed += 1
+            }
+        }
     }
     
     private func handleClick() {
+        guard clicks < requiredClicks else { return }
+        
         clicks += 1
         if clicks >= requiredClicks {
-            onComplete()
+            // Stop the timer
+            timer.upstream.connect().cancel()
+            // Trigger completion with time elapsed
+            onComplete(timeElapsed)
         }
     }
 }

@@ -8,25 +8,36 @@
 import SwiftUI
 
 struct OnScreenKeyboardLevel: View {
-    let onComplete: () -> Void
+    let onComplete: (Int) -> Void
+    @State private var timeElapsed = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var username = ""
     @State private var password = ""
     @State private var errorMessage = ""
     @State private var isShiftActive = false
+    @FocusState private var focusedField: Field?
+    
     private let correctUsername = "Fayaz"
     private let correctPassword = "fayazisCOOL"
-    
     private let letters = (65...90).map { String(UnicodeScalar($0)) }
     
+    enum Field {
+        case username, password
+    }
+
     var body: some View {
         VStack {
             VStack {
                 TextField("Username", text: $username)
                     .disabled(true)
+                    .focused($focusedField, equals: .username)
+                
                 SecureField("Password", text: $password)
                     .disabled(true)
+                    .focused($focusedField, equals: .password)
                 
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6) {
+                // Keyboard Grid
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6)) {
                     ForEach(letters, id: \.self) { letter in
                         KeyboardKey(letter: isShiftActive ? letter : letter.lowercased()) {
                             handleKeyPress(letter)
@@ -34,6 +45,7 @@ struct OnScreenKeyboardLevel: View {
                     }
                 }
                 
+                // Control Row
                 HStack {
                     KeyboardKey(letter: "Shift") {
                         isShiftActive.toggle()
@@ -43,12 +55,9 @@ struct OnScreenKeyboardLevel: View {
                     }
                 }
                 
+                // Login Button
                 Button("Login") {
-                    if username == correctUsername && password == correctPassword {
-                        onComplete()
-                    } else {
-                        errorMessage = "Invalid credentials"
-                    }
+                    handleLogin()
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 
@@ -57,11 +66,15 @@ struct OnScreenKeyboardLevel: View {
             }
             .padding()
         }
+        .onReceive(timer) { _ in timeElapsed += 1 }
+        .onAppear {
+            focusedField = .username
+        }
     }
     
     private func handleKeyPress(_ letter: String) {
         let char = isShiftActive ? letter : letter.lowercased()
-        if username.isFocused {
+        if focusedField == .username {
             username += char
         } else {
             password += char
@@ -70,10 +83,19 @@ struct OnScreenKeyboardLevel: View {
     }
     
     private func handleBackspace() {
-        if username.isFocused {
+        if focusedField == .username {
             username = String(username.dropLast())
         } else {
             password = String(password.dropLast())
+        }
+    }
+    
+    private func handleLogin() {
+        if username == correctUsername && password == correctPassword {
+            timer.upstream.connect().cancel()
+            onComplete(timeElapsed)
+        } else {
+            errorMessage = "Invalid credentials"
         }
     }
 }

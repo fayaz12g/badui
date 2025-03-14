@@ -8,36 +8,32 @@
 
 import SwiftUI
 
-
 struct GameContainerView: View {
     @EnvironmentObject var gameManager: GameManager
-    @State private var timeElapsed = 0
-    @State private var timer: Timer? = nil
     
     var body: some View {
-        VStack {
-            GameHeaderView()
+        ZStack {
+            // Background based on world
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color.red.opacity(0.8),
+                    Color.red.opacity(0.6)
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
             
-            if let level = gameManager.currentLevel {
-                // Render level component here
-                // You'll need to create SwiftUI views for each level type
-                LevelView(level: level)
+            VStack {
+                GameHeaderView()
+                
+                if let level = gameManager.currentLevel {
+                    LevelView(level: level)
+                        .transition(.opacity)
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
         }
-        .onAppear(perform: startTimer)
-        .onDisappear(perform: stopTimer)
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            timeElapsed += 1
-        }
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
     }
 }

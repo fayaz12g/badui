@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct MoneySliderLevel: View {
-    let onComplete: () -> Void
+struct MoneySliderLevelPlus: View {
+    let onComplete: (Int) -> Void
     @State private var sliderValue: Double = 0
+    @State private var timeElapsed = 0
     private let targetAmount: Double = 74.23
     private let threshold: Double = 1
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -25,6 +27,9 @@ struct MoneySliderLevel: View {
             
             Text("Current Amount: $\(sliderValue, specifier: "%.2f")")
                 .padding()
+            
+            Text("Time: \(timeElapsed)s")
+                .font(.headline)
             
             GeometryReader { geo in
                 ZStack {
@@ -50,14 +55,16 @@ struct MoneySliderLevel: View {
             
             Button("Send $\(sliderValue, specifier: "%.2f")") {
                 if abs(sliderValue - targetAmount) <= threshold {
-                    onComplete()
-                } else {
-                    // Show error
+                    timer.upstream.connect().cancel()
+                    onComplete(timeElapsed)
                 }
             }
             .buttonStyle(PrimaryButtonStyle())
         }
         .padding()
+        .onReceive(timer) { _ in
+            timeElapsed += 1
+        }
     }
 }
 
