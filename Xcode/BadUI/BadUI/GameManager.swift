@@ -104,7 +104,7 @@ extension GameManager {
         // Handle challenge mode
         if currentLevel.mode == "c" && timeElapsed <= currentLevel.starThresholds["one"] ?? 0 {
             let baseLevelId = currentLevel.id.replacingOccurrences(of: "+", with: "")
-            if let baseLevel = currentWorld?.levels.first(where: { $0.id == baseLevelId }) {
+            if (currentWorld?.levels.first(where: { $0.id == baseLevelId })) != nil {
                 completeLevel(worldId: currentWorld?.id ?? 0, levelId: baseLevelId, stars: 4)
             }
             stars = 0

@@ -142,27 +142,27 @@ struct WorldConfig {
                         )
                     }
                 ),
-                Level(
-                    id: "W1L7",
-                    title: "Ridiculous Captcha",
-                    description: "Select all the tiny boxes with a cat.",
-                    view: AnyView(RidiculousCaptcha { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
-                    }),
-                    starThresholds: ["one": 90, "two": 60, "three": 30],
-                    requiredStars: 14,
-                    isLocked: true,
-                    mode: "n",
-                    onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
-                    }
-                ),
+//                Level(
+//                    id: "W1L7",
+//                    title: "Ridiculous Captcha",
+//                    description: "Select all the tiny boxes with a cat.",
+//                    view: AnyView(RidiculousCaptcha { timeElapsed in
+//                        GameManager.shared.handleLevelCompletion(
+//                            timeElapsed: timeElapsed,
+//                            currentLevel: GameManager.shared.currentLevel!
+//                        )
+//                    }),
+//                    starThresholds: ["one": 90, "two": 60, "three": 30],
+//                    requiredStars: 14,
+//                    isLocked: true,
+//                    mode: "n",
+//                    onComplete: { timeElapsed in
+//                        GameManager.shared.handleLevelCompletion(
+//                            timeElapsed: timeElapsed,
+//                            currentLevel: GameManager.shared.currentLevel!
+//                        )
+//                    }
+//                ),
                 Level(
                     id: "W1L8",
                     title: "Phone Settings",
@@ -375,27 +375,27 @@ struct WorldConfig {
                         )
                     }
                 ),
-                Level(
-                    id: "W1L7+",
-                    title: "[CHALLENGE] Ridiculous Captcha",
-                    description: "Select all the tiny boxes with a cat.",
-                    view: AnyView(RidiculousCaptchaPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
-                    }),
-                    starThresholds: ["one": 15],
-                    requiredStars: 9,
-                    isLocked: true,
-                    mode: "c",
-                    onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
-                    }
-                ),
+//                Level(
+//                    id: "W1L7+",
+//                    title: "[CHALLENGE] Ridiculous Captcha",
+//                    description: "Select all the tiny boxes with a cat.",
+//                    view: AnyView(RidiculousCaptchaPlus { timeElapsed in
+//                        GameManager.shared.handleLevelCompletion(
+//                            timeElapsed: timeElapsed,
+//                            currentLevel: GameManager.shared.currentLevel!
+//                        )
+//                    }),
+//                    starThresholds: ["one": 15],
+//                    requiredStars: 9,
+//                    isLocked: true,
+//                    mode: "c",
+//                    onComplete: { timeElapsed in
+//                        GameManager.shared.handleLevelCompletion(
+//                            timeElapsed: timeElapsed,
+//                            currentLevel: GameManager.shared.currentLevel!
+//                        )
+//                    }
+//                ),
                 Level(
                     id: "W1L8+",
                     title: "[CHALLENGE] Phone Settings",
