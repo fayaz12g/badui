@@ -487,16 +487,22 @@ struct WorldConfig {
     ]
 }
 
-struct World: Identifiable {
+struct World: Identifiable, Equatable {
     let id: Int
     let name: String
     let description: String
     var levels: [Level]
     let requiredStars: Int
     var isLocked: Bool
+    
+    static func == (lhs: World, rhs: World) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.levels == rhs.levels &&
+        lhs.isLocked == rhs.isLocked
+    }
 }
 
-struct Level: Identifiable {
+struct Level: Identifiable, Equatable {
     let id: String
     let title: String
     let description: String
@@ -521,4 +527,10 @@ struct Level: Identifiable {
         self.mode = mode
         self.onComplete = onComplete
     }
+    
+    static func == (lhs: Level, rhs: Level) -> Bool {
+            lhs.id == rhs.id &&
+            lhs.stars == rhs.stars &&
+            lhs.isLocked == rhs.isLocked
+        }
 }

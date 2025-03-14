@@ -12,13 +12,15 @@ class GameManager: ObservableObject {
     // Add singleton instance
     static let shared = GameManager()
     
-    // Fix @Published property by using proper array modification
     @Published var gameWorlds: [World] = WorldConfig.worlds {
-        didSet {
-            unlockWorlds()
-            calculateTotalStars()
+            didSet {
+                // Prevent infinite recursion
+                if gameWorlds != oldValue {
+                    unlockWorlds()
+                    calculateTotalStars()
+                }
+            }
         }
-    }
     
     enum GameState {
         case mainMenu, worldSelect, levelSelect, playing, levelComplete
@@ -44,11 +46,15 @@ class GameManager: ObservableObject {
             for i in modifiedWorlds.indices {
                 modifiedWorlds[i].isLocked = modifiedWorlds[i].requiredStars > totalStars
             }
-            gameWorlds = modifiedWorlds
+            if modifiedWorlds != gameWorlds {
+                gameWorlds = modifiedWorlds
+            }
         }
         
         func completeLevel(worldId: Int, levelId: String, stars: Int) {
             var modifiedWorlds = gameWorlds
+            var didModify = false
+            
             for worldIndex in modifiedWorlds.indices {
                 guard modifiedWorlds[worldIndex].id == worldId else { continue }
                 
@@ -57,29 +63,52 @@ class GameManager: ObservableObject {
                     
                     // Update stars
                     let currentStars = modifiedWorlds[worldIndex].levels[levelIndex].stars ?? 0
-                    modifiedWorlds[worldIndex].levels[levelIndex].stars = max(currentStars, stars)
+                    if stars > currentStars {
+                        modifiedWorlds[worldIndex].levels[levelIndex].stars = stars
+                        didModify = true
+                    }
                     
                     // Unlock next level
                     let nextIndex = levelIndex + 1
                     if nextIndex < modifiedWorlds[worldIndex].levels.count {
                         let required = modifiedWorlds[worldIndex].levels[nextIndex].requiredStars
                         let worldStars = modifiedWorlds[worldIndex].levels.reduce(0) { $0 + ($1.stars ?? 0) }
+                        let wasLocked = modifiedWorlds[worldIndex].levels[nextIndex].isLocked
                         modifiedWorlds[worldIndex].levels[nextIndex].isLocked = worldStars < required
+                        if wasLocked != modifiedWorlds[worldIndex].levels[nextIndex].isLocked {
+                            didModify = true
+                        }
                     }
                 }
                 
                 // Update world lock status
+                let wasLocked = modifiedWorlds[worldIndex].isLocked
                 modifiedWorlds[worldIndex].isLocked = modifiedWorlds[worldIndex].requiredStars > totalStars
+                if wasLocked != modifiedWorlds[worldIndex].isLocked {
+                    didModify = true
+                }
             }
-            gameWorlds = modifiedWorlds
+            
+            if didModify {
+                gameWorlds = modifiedWorlds
+            }
         }
         
         func unlockWorlds() {
             var modifiedWorlds = gameWorlds
+            var didModify = false
+            
             for i in modifiedWorlds.indices {
+                let wasLocked = modifiedWorlds[i].isLocked
                 modifiedWorlds[i].isLocked = modifiedWorlds[i].requiredStars > totalStars
+                if wasLocked != modifiedWorlds[i].isLocked {
+                    didModify = true
+                }
             }
-            gameWorlds = modifiedWorlds
+            
+            if didModify {
+                gameWorlds = modifiedWorlds
+            }
         }
     
     private func calculateTotalStars() {
