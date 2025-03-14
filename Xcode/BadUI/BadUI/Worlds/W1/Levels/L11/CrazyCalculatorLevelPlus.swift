@@ -1,0 +1,142 @@
+//
+//  CrazyCalculatorLevel.swift
+//  BadUI
+//
+//  Created by Fayaz Shaikh on 3/14/25.
+//
+
+import SwiftUI
+
+struct CrazyCalculatorLevel: View {
+    let onComplete: () -> Void
+    @State private var display = ""
+    @State private var result = ""
+    @State private var errorMessage = ""
+    
+    let buttons: [[String]] = [
+        ["7", "8", "9", "÷"],
+        ["4", "5", "6", "×"],
+        ["1", "2", "3", "-"],
+        ["0", "^", "C", "+"]
+    ]
+    
+    var body: some View {
+        VStack {
+            Text("Crazy Calculator")
+                .font(.title)
+                .padding()
+            
+            Text("Calculate the result of 4+4 in numerical value")
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            // Display
+            TextField("Enter calculation", text: $display)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(.system(size: 24))
+                .padding()
+                .disabled(true)
+            
+            // Result display
+            Text(result.isEmpty ? " " : result)
+                .font(.title)
+                .frame(height: 40)
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+            }
+            
+            // Calculator buttons
+            ForEach(buttons, id: \.self) { row in
+                HStack {
+                    ForEach(row, id: \.self) { button in
+                        CalculatorButton(
+                            title: button,
+                            action: handleButtonPress
+                        )
+                    }
+                }
+            }
+            
+            Button("Calculate") {
+                evaluateExpression()
+            }
+            .buttonStyle(PrimaryButtonStyle())
+        }
+        .padding()
+    }
+    
+    private func handleButtonPress(_ button: String) {
+        switch button {
+        case "C":
+            display = ""
+            result = ""
+            errorMessage = ""
+        case "÷":
+            display += "/"
+        case "×":
+            display += "*"
+        default:
+            display += button
+        }
+    }
+    
+    private func evaluateExpression() {
+        guard !display.isEmpty else { return }
+        
+        do {
+            let expression = display
+                .replacingOccurrences(of: "^", with: "**")
+                .replacingOccurrences(of: " ", with: "")
+            
+            let mathExpression = NSExpression(format: expression)
+            guard let value = mathExpression.expressionValue(with: nil, context: nil) as? Double else {
+                throw CalculatorError.invalidExpression
+            }
+            
+            if value == 8 {
+                onComplete()
+            }
+            
+            result = numberToWord(value)
+        } catch {
+            errorMessage = "Error in calculation. Please enter a valid expression."
+        }
+    }
+    
+    private func numberToWord(_ num: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .spellOut
+        return formatter.string(from: NSNumber(value: num)) ?? String(num)
+    }
+}
+
+struct CalculatorButton: View {
+    let title: String
+    let action: (String) -> Void
+    
+    var body: some View {
+        Button(action: { action(title) }) {
+            Text(title == "C" ? "Del" : title)
+                .font(.title)
+                .frame(width: 70, height: 70)
+                .background(buttonColor)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private var buttonColor: Color {
+        switch title {
+        case "C": return .red
+        case "+", "-", "×", "÷", "^": return .orange
+        default: return .blue
+        }
+    }
+}
+
+enum CalculatorError: Error {
+    case invalidExpression
+}
