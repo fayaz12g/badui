@@ -91,3 +91,28 @@ struct WorldCard: View {
         world.isLocked ? Color.gray : (world.id == 2 ? Color.orange : Color.red)
     }
 }
+
+extension Color {
+    static let darkRed = Color(red: 0.5, green: 0, blue: 0)
+    static let darkOrange = Color(red: 0.7, green: 0.3, blue: 0)
+}
+
+extension LinearGradient {
+    static let lockedWorld = LinearGradient(
+        gradient: Gradient(colors: [.gray, .gray.opacity(0.6)]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    static func worldGradient(for id: Int) -> LinearGradient {
+        let colors = id == 2 ?
+            [Color.orange, Color.darkOrange] :
+            [Color.red, Color.darkRed]
+        
+        return LinearGradient(
+            gradient: Gradient(colors: colors),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+}
