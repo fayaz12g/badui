@@ -21,6 +21,12 @@ struct CompletionOverlay: View {
     @State private var animatedStars = 0
     @State private var show = false
     
+    private func resetState() {
+        gameManager.showCompletion = false
+        gameManager.timeElapsed = 0
+        gameManager.currentLevel = nil
+    }
+    
     var body: some View {
         ZStack {
             Color.black.opacity(0.4)
@@ -60,7 +66,10 @@ struct CompletionOverlay: View {
                 }
                 
                 HStack(spacing: 20) {
-                    Button(action: onMenu) {
+                    Button(action: {
+                        resetState()  
+                        onMenu()
+                    }) {
                         HStack {
                             Image(systemName: "list.bullet")
                             Text("Levels")
@@ -76,7 +85,10 @@ struct CompletionOverlay: View {
                     }
                     .buttonStyle(SecondaryButtonStyle())
                     
-                    Button(action: onNext) {
+                    Button(action: {
+                        resetState()
+                        onNext()
+                    }) {
                         HStack {
                             Image(systemName: "arrow.right")
                             Text(nextLevel == nil ? "Menu" : "Next")

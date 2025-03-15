@@ -78,8 +78,10 @@ struct LevelView: View {
         gameManager.showCompletion = false
         gameManager.timeElapsed = 0
         gameManager.currentLevel = nil
+        gameManager.gameState = .levelSelect
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            gameManager.currentLevel = level  // Force view recreation
+            gameManager.gameState = .playing
+            gameManager.currentLevel = level
         }
     }
     
