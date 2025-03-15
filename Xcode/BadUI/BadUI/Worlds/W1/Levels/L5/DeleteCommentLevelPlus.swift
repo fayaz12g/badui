@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DeleteCommentLevelPlus: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var comments = ["wow so cute!"]
     @State private var newComment = ""
     @State private var likes = 0
@@ -86,7 +86,7 @@ struct DeleteCommentLevelPlus: View {
             comments.removeAll { $0 == newComment }
             if comments.isEmpty {
                 timer.upstream.connect().cancel()
-                onComplete(timeElapsed)
+                gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
             }
         } else {
             comments.append(newComment)

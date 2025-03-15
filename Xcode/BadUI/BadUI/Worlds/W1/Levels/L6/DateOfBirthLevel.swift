@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DateOfBirthLevel: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var selectedDay = ""
     @State private var selectedMonth = ""
     @State private var selectedYear = ""
@@ -62,7 +62,7 @@ struct DateOfBirthLevel: View {
                    selectedMonth == targetMonth &&
                    selectedYear == targetYear {
                     timer.upstream.connect().cancel()
-                    onComplete(timeElapsed)
+                    gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
                 }
             }
             .buttonStyle(PrimaryButtonStyle())

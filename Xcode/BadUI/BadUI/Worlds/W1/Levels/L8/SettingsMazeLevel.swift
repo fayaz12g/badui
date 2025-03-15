@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsMazeLevel: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var currentScreen: Screen = .main
     @State private var showAlert = false
     @State private var alertMessage = ""
@@ -79,7 +79,7 @@ struct SettingsMazeLevel: View {
                 Button("Speaker") {
                     if settings.bluetooth {
                         timer.upstream.connect().cancel()
-                        onComplete(timeElapsed)
+                        gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
                     } else {
                         showAlert(message: "Enable Bluetooth first")
                     }

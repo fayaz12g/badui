@@ -1,4 +1,3 @@
-//
 //  WorldSelectView.swift
 //  BadUI
 //
@@ -9,31 +8,61 @@ import SwiftUI
 
 struct WorldSelectView: View {
     @EnvironmentObject var gameManager: GameManager
-    @EnvironmentObject var themeManager: ThemeManager
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("Select World")
-                    .font(.largeTitle)
-                    .padding()
-                
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
-                    ForEach(gameManager.gameWorlds) { world in
-                        WorldCard(world: world)
-                            .onTapGesture {
-                                if !world.isLocked {
-                                    gameManager.currentWorld = world
-                                    gameManager.gameState = .levelSelect
+        NavigationView {
+            ScrollView {
+                VStack {
+                    Text("Select World")
+                        .font(.largeTitle)
+                        .padding()
+                    
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))]) {
+                        ForEach(gameManager.gameWorlds) { world in
+                            WorldCard(world: world)
+                                .onTapGesture {
+                                    if !world.isLocked {
+                                        gameManager.currentWorld = world
+                                        gameManager.gameState = .levelSelect
+                                    }
                                 }
-                            }
+                        }
+                    }
+                    .padding()
+                }
+                .overlay(alignment: .topTrailing) {
+                    StarCounter(totalStars: gameManager.totalStars)
+                }
+            }
+            .background(gradientBackground)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        gameManager.gameState = .mainMenu
+                    }) {
+                        Image(systemName: "arrow.left")
+                            .foregroundColor(.primary)
                     }
                 }
-                .padding()
             }
-            .overlay(alignment: .topTrailing) {
-                StarCounter(totalStars: gameManager.totalStars)
-            }
+        }
+    }
+    
+    var gradientBackground: LinearGradient {
+        if colorScheme == .dark {
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.black, Color.gray]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        } else {
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.white, Color.gray.opacity(0.5)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
         }
     }
 }

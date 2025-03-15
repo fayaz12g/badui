@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnScreenKeyboardLevel: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var timeElapsed = 0
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var username = ""
@@ -93,7 +93,7 @@ struct OnScreenKeyboardLevel: View {
     private func handleLogin() {
         if username == correctUsername && password == correctPassword {
             timer.upstream.connect().cancel()
-            onComplete(timeElapsed)
+            gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
         } else {
             errorMessage = "Invalid credentials"
         }

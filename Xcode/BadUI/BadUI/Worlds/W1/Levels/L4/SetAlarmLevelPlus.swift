@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SetAlarmLevelPlus: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var hours = 1
     @State private var minutes = 0
     @State private var ampm = "AM"
@@ -60,7 +60,7 @@ struct SetAlarmLevelPlus: View {
             Button("Set Alarm") {
                 if hours == targetHours && minutes == targetMinutes && ampm == targetAmpm {
                     timer.upstream.connect().cancel()
-                    onComplete(timeElapsed)
+                    gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
                 }
             }
             .buttonStyle(PrimaryButtonStyle())

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MoneySliderLevel: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var sliderValue: Double = 0
     @State private var timeElapsed = 0
     private let targetAmount: Double = 74.23
@@ -56,7 +56,7 @@ struct MoneySliderLevel: View {
             Button("Send $\(sliderValue, specifier: "%.2f")") {
                 if abs(sliderValue - targetAmount) <= threshold {
                     timer.upstream.connect().cancel()
-                    onComplete(timeElapsed)
+                    gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
                 }
             }
             .buttonStyle(PrimaryButtonStyle())

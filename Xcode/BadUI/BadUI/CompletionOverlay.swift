@@ -16,6 +16,7 @@ struct CompletionOverlay: View {
     let onNext: () -> Void
     let onReplay: () -> Void
     let onMenu: () -> Void
+    @Environment(\.colorScheme) var colorScheme
     
     @State private var animatedStars = 0
     @State private var show = false
@@ -31,8 +32,8 @@ struct CompletionOverlay: View {
                 Text("Level Complete!")
                     .font(.system(size: 32, weight: .bold))
                 
-                StarRating(stars: animatedStars, mode: gameManager.currentLevel?.mode ?? "n")
-                    .frame(height: 40)
+                AnimatedStarRating(earnedStars: stars, mode: gameManager.currentLevel?.mode ?? "n")
+                    .frame(height: 60)
                 
                 Text("Time: \(timeElapsed)s")
                     .font(.title2)
@@ -97,35 +98,81 @@ struct CompletionOverlay: View {
         }
         .onAppear {
             show = true
-            animateStars()
-        }
-    }
-    
-    private func animateStars() {
-        withAnimation(.easeInOut(duration: 1.5)) {
-            animatedStars = stars
         }
     }
 }
 
-struct StarRating: View {
-    let stars: Int
+struct AnimatedStarRating: View {
+    let earnedStars: Int
     let mode: String
     
+    @State private var animatedStars: [Bool] = [false, false, false]
+    @State private var pulseScales: [CGFloat] = [1.0, 1.0, 1.0]
+    @State private var opacities: [Double] = [0.0, 0.0, 0.0]
+    
     var body: some View {
-        HStack {
-            ForEach(0..<3) { index in
-                Image(systemName: index < stars ? "star.fill" : "star")
-                    .foregroundColor(starColor(for: index))
-                    .scaleEffect(index < stars ? 1.2 : 1.0)
+        HStack(spacing: 16) {
+            if mode == "c" {
+                // Challenge mode - single red star
+                ZStack {
+                    // Pulse effect
+                    Circle()
+                        .fill(Color.red.opacity(opacities[0]))
+                        .scaleEffect(pulseScales[0])
+                    
+                    // Star outline/fill
+                    Image(systemName: animatedStars[0] ? "star.fill" : "star")
+                        .foregroundColor(.red)
+                        .font(.system(size: 36))
+                }
+                .frame(width: 60, height: 60)
+            } else {
+                // Normal mode - three yellow stars
+                ForEach(0..<3) { index in
+                    ZStack {
+                        // Pulse effect
+                        Circle()
+                            .fill(Color.yellow.opacity(opacities[index]))
+                            .scaleEffect(pulseScales[index])
+                        
+                        // Star outline/fill
+                        Image(systemName: animatedStars[index] ? "star.fill" : "star")
+                            .foregroundColor(.yellow)
+                            .font(.system(size: 30))
+                    }
+                    .frame(width: 50, height: 50)
+                }
             }
+        }
+        .onAppear {
+            startAnimation()
         }
     }
     
-    private func starColor(for index: Int) -> Color {
-        if mode == "c" {  // Challenge mode
-            return index == 3 ? .yellow : .gray
+    private func startAnimation() {
+        let totalStars = mode == "c" ? 1 : 3
+        let animationDelay = 0.5 // 0.5 seconds between each star
+        
+        for i in 0..<min(earnedStars, totalStars) {
+            // Schedule animation for this star
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * animationDelay) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                    animatedStars[i] = true
+                }
+                
+                // Start pulse animation
+                withAnimation(.easeOut(duration: 0.5)) {
+                    opacities[i] = 0.6
+                    pulseScales[i] = 2.0
+                }
+                
+                // Fade out pulse
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * animationDelay + 0.2) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        opacities[i] = 0.0
+                    }
+                }
+            }
         }
-        return [.yellow, .yellow, .yellow][index]
     }
 }

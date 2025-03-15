@@ -5,11 +5,11 @@
 //  Created by Fayaz Shaikh on 3/14/25.
 //
 
-
 import SwiftUI
 
 struct GameContainerView: View {
     @EnvironmentObject var gameManager: GameManager
+    @Environment(\.colorScheme) var colorScheme
     
     private var nextLevel: Level? {
         guard let world = gameManager.currentWorld,
@@ -43,10 +43,10 @@ struct GameContainerView: View {
         gameManager.currentLevel = nil
     }
     
-    var body: some View {
-        ZStack {
-            // Background based on world
-            LinearGradient(
+    private var backgroundGradient: LinearGradient {
+        if gameManager.currentLevel?.mode == "c" {
+            // Challenge level - red background
+            return LinearGradient(
                 gradient: Gradient(colors: [
                     Color.red.opacity(0.8),
                     Color.red.opacity(0.6)
@@ -54,8 +54,34 @@ struct GameContainerView: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .edgesIgnoringSafeArea(.all)
-            
+        } else {
+            // Normal level - gray background based on color scheme
+            if colorScheme == .dark {
+                return LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.gray.opacity(0.8),
+                        Color.gray.opacity(0.6)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            } else {
+                return LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.gray.opacity(0.3),
+                        Color.gray.opacity(0.2)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            }
+        }
+    }
+    
+    var body: some View {
+        ZStack {
+            backgroundGradient
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 GameHeaderView()

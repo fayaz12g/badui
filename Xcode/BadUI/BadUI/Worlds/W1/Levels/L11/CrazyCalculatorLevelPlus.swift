@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CrazyCalculatorLevelPlus: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var timeElapsed = 0
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var display = ""
@@ -100,7 +100,7 @@ struct CrazyCalculatorLevelPlus: View {
             
             if value == 8 {
                 timer.upstream.connect().cancel()
-                onComplete(timeElapsed)
+                gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
             }
             
             result = numberToWord(value)

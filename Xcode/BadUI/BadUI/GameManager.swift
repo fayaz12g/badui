@@ -9,8 +9,6 @@ import Combine
 import SwiftUI
 
 class GameManager: ObservableObject {
-    // Add singleton instance
-    static let shared = GameManager()
     
     @Published var gameWorlds: [World] = WorldConfig.worlds {
             didSet {
@@ -65,48 +63,53 @@ class GameManager: ObservableObject {
             }
         }
         
-        func completeLevel(worldId: Int, levelId: String, stars: Int) {
-            var modifiedWorlds = gameWorlds
-            var didModify = false
+    func completeLevel(worldId: Int, levelId: String, stars: Int) {
+        var modifiedWorlds = gameWorlds
+        var didModify = false
+        
+        for worldIndex in modifiedWorlds.indices {
+            guard modifiedWorlds[worldIndex].id == worldId else { continue }
             
-            for worldIndex in modifiedWorlds.indices {
-                guard modifiedWorlds[worldIndex].id == worldId else { continue }
+            // Add this to get reference to the world we're modifying
+            var modifiedWorld = modifiedWorlds[worldIndex]
+            
+            for levelIndex in modifiedWorld.levels.indices {
+                guard modifiedWorld.levels[levelIndex].id == levelId else { continue }
                 
-                for levelIndex in modifiedWorlds[worldIndex].levels.indices {
-                    guard modifiedWorlds[worldIndex].levels[levelIndex].id == levelId else { continue }
-                    
-                    // Update stars
-                    let currentStars = modifiedWorlds[worldIndex].levels[levelIndex].stars ?? 0
-                    if stars > currentStars {
-                        modifiedWorlds[worldIndex].levels[levelIndex].stars = stars
-                        didModify = true
-                    }
-                    
-                    // Unlock next level
-                    let nextIndex = levelIndex + 1
-                    if nextIndex < modifiedWorlds[worldIndex].levels.count {
-                        let required = modifiedWorlds[worldIndex].levels[nextIndex].requiredStars
-                        let worldStars = modifiedWorlds[worldIndex].levels.reduce(0) { $0 + ($1.stars ?? 0) }
-                        let wasLocked = modifiedWorlds[worldIndex].levels[nextIndex].isLocked
-                        modifiedWorlds[worldIndex].levels[nextIndex].isLocked = worldStars < required
-                        if wasLocked != modifiedWorlds[worldIndex].levels[nextIndex].isLocked {
-                            didModify = true
-                        }
-                    }
-                }
-                
-                // Update world lock status
-                let wasLocked = modifiedWorlds[worldIndex].isLocked
-                modifiedWorlds[worldIndex].isLocked = modifiedWorlds[worldIndex].requiredStars > totalStars
-                if wasLocked != modifiedWorlds[worldIndex].isLocked {
+                // Update stars
+                let currentStars = modifiedWorld.levels[levelIndex].stars ?? 0
+                if stars > currentStars {
+                    modifiedWorld.levels[levelIndex].stars = stars
                     didModify = true
                 }
+                
+                // Unlock next level
+                let nextIndex = levelIndex + 1
+                if nextIndex < modifiedWorld.levels.count {
+                    let required = modifiedWorld.levels[nextIndex].requiredStars
+                    let worldStars = modifiedWorld.levels.reduce(0) { $0 + ($1.stars ?? 0) }
+                    let wasLocked = modifiedWorld.levels[nextIndex].isLocked
+                    modifiedWorld.levels[nextIndex].isLocked = worldStars < required
+                    if wasLocked != modifiedWorld.levels[nextIndex].isLocked {
+                        didModify = true
+                    }
+                }
             }
             
-            if didModify {
-                gameWorlds = modifiedWorlds
+            // Update the modified world in the array
+            modifiedWorlds[worldIndex] = modifiedWorld
+            
+            // Update currentWorld reference if needed
+            if modifiedWorld.id == currentWorld?.id {
+                currentWorld = modifiedWorld
             }
         }
+        
+        if didModify {
+            gameWorlds = modifiedWorlds
+            calculateTotalStars() // Force total stars recalculation
+        }
+    }
         
         func unlockWorlds() {
             var modifiedWorlds = gameWorlds
@@ -139,6 +142,8 @@ extension GameManager {
             return
         }
         
+        self.timeElapsed = timeElapsed
+        
         // Calculate stars
         var stars = 0
         if timeElapsed <= currentLevel.starThresholds["three"] ?? 0 {
@@ -166,5 +171,8 @@ extension GameManager {
         // Update earned stars for overlay
         earnedStars = stars
         showCompletion = true
+        
+        // reset
+        self.timeElapsed = 0
     }
 }

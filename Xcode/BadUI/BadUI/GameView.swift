@@ -9,13 +9,9 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var gameManager: GameManager
-    @EnvironmentObject var themeManager: ThemeManager
     
     var body: some View {
         ZStack {
-            // Background based on theme
-            themeManager.backgroundColor
-                .ignoresSafeArea()
             
             // Main content
             Group {
@@ -56,9 +52,6 @@ struct GameView: View {
             }
             .transition(.opacity)
             
-            // Theme toggle positioned absolutely
-            ThemeToggle()
-                .position(x: UIScreen.main.bounds.width - 50, y: 50)
         }
     }
     
@@ -95,9 +88,3 @@ struct GameView: View {
     }
 }
 
-// Theme background extension
-extension ThemeManager {
-    var backgroundColor: Color {
-        isDarkMode ? .black : .white
-    }
-}

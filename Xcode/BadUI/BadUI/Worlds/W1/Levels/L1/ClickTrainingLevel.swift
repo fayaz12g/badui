@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClickTrainingLevel: View {
-    let onComplete: (Int) -> Void  
+    @EnvironmentObject var gameManager: GameManager
     @State private var clicks = 0
     @State private var timeElapsed = 0
     private let requiredClicks = 5
@@ -59,7 +59,7 @@ struct ClickTrainingLevel: View {
             // Stop the timer
             timer.upstream.connect().cancel()
             // Trigger completion with time elapsed
-            onComplete(timeElapsed)
+            gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
         }
     }
 }

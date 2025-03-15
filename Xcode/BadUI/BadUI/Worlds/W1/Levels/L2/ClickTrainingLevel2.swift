@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClickTrainingLevel2: View {
-    let onComplete: (Int) -> Void
+    @EnvironmentObject var gameManager: GameManager
     @State private var clicks = 0
     @State private var progress: CGFloat = 0
     @State private var timeElapsed = 0
@@ -73,7 +73,8 @@ struct ClickTrainingLevel2: View {
             if newValue >= 100 {
                 progressTimer.upstream.connect().cancel()
                 gameTimer.upstream.connect().cancel()
-                onComplete(timeElapsed)
+                gameManager.handleLevelCompletion(timeElapsed: timeElapsed)
+
             }
         }
     }
