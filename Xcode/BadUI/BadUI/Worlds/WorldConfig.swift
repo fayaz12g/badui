@@ -19,7 +19,6 @@ struct WorldConfig {
                     id: "W1L1",
                     title: "Click Training",
                     description: "Learn the basics by clicking a button",
-                    view: AnyView(ClickTrainingLevel()),
                     starThresholds: ["one": 10, "two": 5, "three": 1],
                     requiredStars: 0,
                     isLocked: false,
@@ -29,7 +28,6 @@ struct WorldConfig {
                     id: "W1L2",
                     title: "Click Training 2",
                     description: "Learn the basics by clicking a button again.",
-                    view: AnyView(ClickTrainingLevel2()),
                     starThresholds: ["one": 10, "two": 5, "three": 1],
                     requiredStars: 1,
                     isLocked: true,
@@ -39,7 +37,6 @@ struct WorldConfig {
                     id: "W1L3",
                     title: "Slide to Send",
                     description: "Send $340.23.",
-                    view: AnyView(MoneySliderLevel()),
                     starThresholds: ["one": 30, "two": 15, "three": 5],
                     requiredStars: 3,
                     isLocked: true,
@@ -50,7 +47,6 @@ struct WorldConfig {
                     id: "W1L4",
                     title: "Set the Alarm",
                     description: "Set the alarm to 7:30 AM.",
-                    view: AnyView(SetAlarmLevel()),
                     starThresholds: ["one": 45, "two": 30, "three": 10],
                     requiredStars: 5,
                     isLocked: true,
@@ -60,7 +56,6 @@ struct WorldConfig {
                     id: "W1L5",
                     title: "Delete Comment",
                     description: "Delete your comment on a social media post.",
-                    view: AnyView(DeleteCommentLevel()),
                     starThresholds: ["one": 60, "two": 30, "three": 5],
                     requiredStars: 10,
                     isLocked: true,
@@ -70,7 +65,7 @@ struct WorldConfig {
                     id: "W1L6",
                     title: "Fill in Date of Birth",
                     description: "Fill in your date of birth.",
-                    view: AnyView(DateOfBirthLevel()),
+
                     starThresholds: ["one": 30, "two": 10, "three": 5],
                     requiredStars: 12,
                     isLocked: true,
@@ -101,7 +96,6 @@ struct WorldConfig {
                     id: "W1L8",
                     title: "Phone Settings",
                     description: "Turn off bluetooth.",
-                    view: AnyView(SettingsMazeLevel()),
                     starThresholds: ["one": 30, "two": 20, "three": 10],
                     requiredStars: 16,
                     isLocked: true,
@@ -111,7 +105,6 @@ struct WorldConfig {
                     id: "W1L9",
                     title: "Log In",
                     description: "Login to your social media account.",
-                    view: AnyView(OnScreenKeyboardLevel()),
                     starThresholds: ["one": 60, "two": 45, "three": 20],
                     requiredStars: 18,
                     isLocked: true,
@@ -121,7 +114,6 @@ struct WorldConfig {
                     id: "W1L10",
                     title: "Crazy Calculator",
                     description: "Calculate some numbers.",
-                    view: AnyView(CrazyCalculatorLevel()),
                     starThresholds: ["one": 60, "two": 30, "three": 3],
                     requiredStars: 20,
                     isLocked: true,
@@ -131,7 +123,6 @@ struct WorldConfig {
                     id: "W1L11",
                     title: "E-Reader Font",
                     description: "Change the font size on the e-reader.",
-                    view: AnyView(FontSizeChallengeLevel()),
                     starThresholds: ["one": 90, "two": 60, "three": 30],
                     requiredStars: 35,
                     isLocked: true,
@@ -143,7 +134,6 @@ struct WorldConfig {
                     id: "W1L1+",
                     title: "[CHALLENGE] Click Training",
                     description: "Learn the basics by clicking a button",
-                    view: AnyView(ClickTrainingLevelPlus()),
                     starThresholds: ["one": 1],
                     requiredStars: 0,
                     isLocked: false,
@@ -153,7 +143,6 @@ struct WorldConfig {
                     id: "W1L2+",
                     title: "[CHALLENGE] Click Training 2",
                     description: "Learn the basics by clicking a button again.",
-                    view: AnyView(ClickTrainingLevel2Plus()),
                     starThresholds: ["one": 2],
                     requiredStars: 1,
                     isLocked: true,
@@ -163,7 +152,6 @@ struct WorldConfig {
                     id: "W1L3+",
                     title: "[CHALLENGE] Slide to Send",
                     description: "Send $340.23.",
-                    view: AnyView(MoneySliderLevelPlus()),
                     starThresholds: ["one": 10],
                     requiredStars: 3,
                     isLocked: true,
@@ -173,7 +161,6 @@ struct WorldConfig {
                     id: "W1L4+",
                     title: "[CHALLENGE] Set the Alarm",
                     description: "Set the alarm to 7:30 AM.",
-                    view: AnyView(SetAlarmLevelPlus()),
                     starThresholds: ["one": 5],
                     requiredStars: 5,
                     isLocked: true,
@@ -183,7 +170,6 @@ struct WorldConfig {
                     id: "W1L5+",
                     title: "[CHALLENGE] Delete Comment",
                     description: "Delete your comment on a social media post.",
-                    view: AnyView(DeleteCommentLevelPlus()),
                     starThresholds: ["one": 5],
                     requiredStars: 7,
                     isLocked: true,
@@ -193,7 +179,6 @@ struct WorldConfig {
                     id: "W1L6+",
                     title: "[CHALLENGE] Fill in Date of Birth",
                     description: "Fill in your date of birth.",
-                    view: AnyView(DateOfBirthLevelPlus()),
                     starThresholds: ["one": 10],
                     requiredStars: 11,
                     isLocked: true,
@@ -224,7 +209,6 @@ struct WorldConfig {
                     id: "W1L8+",
                     title: "[CHALLENGE] Phone Settings",
                     description: "Turn off bluetooth.",
-                    view: AnyView(SettingsMazeLevelPlus()),
                     starThresholds: ["one": 5],
                     requiredStars: 16,
                     isLocked: true,
@@ -234,7 +218,6 @@ struct WorldConfig {
                     id: "W1L9+",
                     title: "[CHALLENGE] Log In",
                     description: "Login to your social media account.",
-                    view: AnyView(OnScreenKeyboardLevelPlus()),
                     starThresholds: ["one": 20],
                     requiredStars: 18,
                     isLocked: true,
@@ -244,7 +227,6 @@ struct WorldConfig {
                     id: "W1L10+",
                     title: "[CHALLENGE] Crazy Calculator",
                     description: "Calculate some numbers.",
-                    view: AnyView(CrazyCalculatorLevelPlus()),
                     starThresholds: ["one": 3],
                     requiredStars: 20,
                     isLocked: true,
@@ -254,7 +236,6 @@ struct WorldConfig {
                     id: "W1L11+",
                     title: "[CHALLENGE] E-Reader Font",
                     description: "Change the font size on the e-reader.",
-                    view: AnyView(FontSizeChallengeLevelPlus()),
                     starThresholds: ["one": 10],
                     requiredStars: 35,
                     isLocked: true,
@@ -267,7 +248,7 @@ struct WorldConfig {
     ]
 }
 
-struct World: Identifiable, Equatable {
+struct World: Identifiable, Equatable, Codable {
     let id: Int
     let name: String
     let description: String
@@ -282,33 +263,55 @@ struct World: Identifiable, Equatable {
     }
 }
 
-struct Level: Identifiable, Equatable {
+struct Level: Identifiable, Equatable, Codable {
     let id: String
     let title: String
     let description: String
-    let view: AnyView
     var stars: Int?
     let starThresholds: [String: Int]
     let requiredStars: Int
     var isLocked: Bool
     let mode: String
     
-    init(id: String, title: String, description: String, view: AnyView,
-         starThresholds: [String: Int], requiredStars: Int, isLocked: Bool,
-         mode: String) {
-        self.id = id
-        self.title = title
-        self.description = description
-        self.view = view
-        self.starThresholds = starThresholds
-        self.requiredStars = requiredStars
-        self.isLocked = isLocked
-        self.mode = mode
-    }
-    
     static func == (lhs: Level, rhs: Level) -> Bool {
-            lhs.id == rhs.id &&
-            lhs.stars == rhs.stars &&
-            lhs.isLocked == rhs.isLocked
+        lhs.id == rhs.id &&
+        lhs.stars == rhs.stars &&
+        lhs.isLocked == rhs.isLocked &&
+        lhs.mode == rhs.mode
+    }
+}
+
+struct LevelViewFactory {
+    @EnvironmentObject var gameManager: GameManager
+    
+    static func view(for level: Level) -> AnyView {
+        
+        switch level.id {
+        // Normal Levels
+        case "W1L1": return AnyView(ClickTrainingLevel())
+        case "W1L2": return AnyView(ClickTrainingLevel2())
+        case "W1L3": return AnyView(MoneySliderLevel())
+        case "W1L4": return AnyView(SetAlarmLevel())
+        case "W1L5": return AnyView(DeleteCommentLevel())
+        case "W1L6": return AnyView(DateOfBirthLevel())
+        case "W1L8": return AnyView(SettingsMazeLevel())
+        case "W1L9": return AnyView(OnScreenKeyboardLevel())
+        case "W1L10": return AnyView(CrazyCalculatorLevel())
+        case "W1L11": return AnyView(FontSizeChallengeLevel())
+            
+        // Challenge Levels
+        case "W1L1+": return AnyView(ClickTrainingLevelPlus())
+        case "W1L2+": return AnyView(ClickTrainingLevel2Plus())
+        case "W1L3+": return AnyView(MoneySliderLevelPlus())
+        case "W1L4+": return AnyView(SetAlarmLevelPlus())
+        case "W1L5+": return AnyView(DeleteCommentLevelPlus())
+        case "W1L6+": return AnyView(DateOfBirthLevelPlus())
+        case "W1L8+": return AnyView(SettingsMazeLevelPlus())
+        case "W1L9+": return AnyView(OnScreenKeyboardLevelPlus())
+        case "W1L10+": return AnyView(CrazyCalculatorLevelPlus())
+        case "W1L11+": return AnyView(FontSizeChallengeLevelPlus())
+            
+        default: return AnyView(Text("Level view not implemented"))
         }
+    }
 }

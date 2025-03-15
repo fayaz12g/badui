@@ -15,6 +15,12 @@ struct BadUIApp: App {
         WindowGroup {
             GameView()
                 .environmentObject(gameManager)
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                                    gameManager.saveGameState()
+                                }
+                                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification)) { _ in
+                                    gameManager.saveGameState()
+                                }
         }
     }
 }

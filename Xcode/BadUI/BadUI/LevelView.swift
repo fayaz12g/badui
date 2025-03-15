@@ -29,7 +29,7 @@ struct LevelView: View {
     var body: some View {
         ZStack {
             // Level Content
-            level.view
+            gameManager.getLevelView()
             
             // Completion Overlay
             if gameManager.showCompletion {
@@ -77,6 +77,10 @@ struct LevelView: View {
     private func resetLevel() {
         gameManager.showCompletion = false
         gameManager.timeElapsed = 0
+        gameManager.currentLevel = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            gameManager.currentLevel = level  // Force view recreation
+        }
     }
     
     private func returnToLevelSelect() {

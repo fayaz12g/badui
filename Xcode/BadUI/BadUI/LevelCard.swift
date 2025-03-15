@@ -63,30 +63,18 @@ struct LevelCard: View {
                             .font(.caption2)
                             .foregroundColor(.white.opacity(0.6))
                     }
-                }
-                .padding()
-                .background(
-                    level.isLocked ?
-                    Color.gray.opacity(0.3) :
-                    Color.blue.opacity(0.7)
-                )
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.blue, lineWidth: 1)
-                )
-                .overlay {
-                    if !level.isLocked {
+                    else {
+                  
                         // Challenge unlocked: Show buttons
                         if isChallengeUnlocked(), let challengeLevel = getChallengeLevel() {
                             HStack {
                                 Button {
                                     handleLevelSelection(level)
                                 } label: {
-                                    Text("Play Level")
+                                    Text("Replay")
                                         .padding(.vertical, 8)
                                         .padding(.horizontal, 12)
-                                        .background(Color.blue)
+                                        .background(Color.yellow)
                                         .foregroundColor(.white)
                                         .cornerRadius(8)
                                 }
@@ -104,8 +92,23 @@ struct LevelCard: View {
                             }
                             .padding(.top, 4)
                         }
+                    }
+                }
+                .padding()
+                .background(
+                    level.isLocked ?
+                    Color.gray.opacity(0.3) :
+                    Color.blue.opacity(0.7)
+                )
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.blue, lineWidth: 1)
+                )
+                .overlay {
+                    if !level.isLocked {
                         // Challenge locked: Whole card is button
-                        else {
+                        if !isChallengeUnlocked() {
                             Button {
                                 handleLevelSelection(level)
                             } label: {

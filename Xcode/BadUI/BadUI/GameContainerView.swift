@@ -86,8 +86,8 @@ struct GameContainerView: View {
             VStack {
                 GameHeaderView()
                 
-                if let level = gameManager.currentLevel {
-                    level.view
+                if gameManager.currentLevel != nil {
+                    gameManager.getLevelView()
                 }
                 
                 Spacer()

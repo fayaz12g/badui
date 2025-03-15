@@ -9,6 +9,7 @@ import Combine
 import SwiftUI
 
 class GameManager: ObservableObject {
+    private let saveKey = "SavedGameState"
     
     @Published var gameWorlds: [World] = WorldConfig.worlds {
             didSet {
@@ -34,23 +35,53 @@ class GameManager: ObservableObject {
     @Published var totalStars: Int = 0
     
     init() {
+        loadGameState()
         calculateTotalStars()
         unlockInitialWorlds()
     }
 
+    private func loadGameState() {
+        guard let data = UserDefaults.standard.data(forKey: saveKey),
+              let decoded = try? JSONDecoder().decode(SavedGameState.self, from: data) else {
+            return
+        }
+        
+        gameWorlds = decoded.worlds
+        totalStars = decoded.totalStars
+    }
+
+    func saveGameState() {
+        let state = SavedGameState(
+            worlds: gameWorlds,
+            totalStars: totalStars
+        )
+        
+        if let encoded = try? JSONEncoder().encode(state) {
+            UserDefaults.standard.set(encoded, forKey: saveKey)
+        }
+    }
+
+    private struct SavedGameState: Codable {
+        let worlds: [World]
+        let totalStars: Int
+    }
     
-    // When starting a level:
+    func getLevelView() -> AnyView {
+            guard let level = currentLevel else { return AnyView(EmptyView()) }
+            return LevelViewFactory.view(for: level)
+        }
+    
     func startLevel(_ level: Level) {
         currentLevel = level
         timeElapsed = 0
-        showCompletion = false
+        showCompletion = false  // Add this line
         gameState = .playing
     }
 
-    // When completing a level:
-    private func showCompletionOverlay() {
-        gameState = .levelComplete
-        showCompletion = true
+    func resetLevel() {
+        showCompletion = false
+        timeElapsed = 0
+        currentLevel = currentLevel  // Force view refresh
     }
     
     private func unlockInitialWorlds() {
