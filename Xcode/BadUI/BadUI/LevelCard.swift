@@ -22,7 +22,7 @@ struct LevelCard: View {
     }
     
     private func isChallengeUnlocked() -> Bool {
-        (level?.stars ?? 0) >= 1
+        (level?.stars ?? 0) >= 3
     }
     
     private func handleLevelSelection(_ level: Level) {
@@ -48,7 +48,6 @@ struct LevelCard: View {
                             StarDisplay(
                                 stars: level.stars ?? 0,
                                 mode: level.mode,
-                                challengeStars: getChallengeLevel()?.stars ?? 0,
                                 showChallengeStars: isChallengeUnlocked()
                             )
                         }

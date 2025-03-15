@@ -27,6 +27,9 @@ struct LevelSelectView: View {
                     }
                     .padding()
                 }
+                .overlay(alignment: .topTrailing) {
+                    StarCounter(totalStars: gameManager.totalStars)
+                }
             }
             .background(gradientBackground)
             .navigationBarTitleDisplayMode(.inline)

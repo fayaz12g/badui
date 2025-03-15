@@ -42,7 +42,6 @@ struct WorldConfig {
                     isLocked: true,
                     mode: "n",
                 ),
-                // Continue this pattern for all levels...
                 Level(
                     id: "W1L4",
                     title: "Set the Alarm",

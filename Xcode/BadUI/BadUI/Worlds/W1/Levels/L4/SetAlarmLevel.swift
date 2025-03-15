@@ -97,7 +97,10 @@ struct NumericTimeComponent: View {
                     timer.invalidate()
                     return
                 }
-                value = (value % (range.upperBound - range.lowerBound + 1)) + range.lowerBound
+                value = (value + 1) % (range.upperBound + 1)
+                if value < range.lowerBound {
+                    value = range.lowerBound
+                }
             }
         }
     }
