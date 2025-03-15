@@ -41,6 +41,20 @@ class GameManager: ObservableObject {
     }
 
     
+    // When starting a level:
+    func startLevel(_ level: Level) {
+        currentLevel = level
+        timeElapsed = 0
+        showCompletion = false
+        gameState = .playing
+    }
+
+    // When completing a level:
+    private func showCompletionOverlay() {
+        gameState = .levelComplete
+        showCompletion = true
+    }
+    
     private func unlockInitialWorlds() {
             var modifiedWorlds = gameWorlds
             for i in modifiedWorlds.indices {
@@ -119,7 +133,12 @@ class GameManager: ObservableObject {
 }
 
 extension GameManager {
-    func handleLevelCompletion(timeElapsed: Int, currentLevel: Level) {
+    func handleLevelCompletion(timeElapsed: Int) {
+        guard let currentLevel = currentLevel else {
+            print("No current level set")
+            return
+        }
+        
         // Calculate stars
         var stars = 0
         if timeElapsed <= currentLevel.starThresholds["three"] ?? 0 {
@@ -144,7 +163,8 @@ extension GameManager {
             completeLevel(worldId: worldId, levelId: currentLevel.id, stars: stars)
         }
         
-        // Show completion overlay
-        gameState = .levelComplete
+        // Update earned stars for overlay
+        earnedStars = stars
+        showCompletion = true
     }
 }

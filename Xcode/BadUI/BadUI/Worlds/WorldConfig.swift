@@ -20,20 +20,14 @@ struct WorldConfig {
                     title: "Click Training",
                     description: "Learn the basics by clicking a button",
                     view: AnyView(ClickTrainingLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                        GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 10, "two": 5, "three": 1],
                     requiredStars: 0,
                     isLocked: false,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                        GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -41,20 +35,14 @@ struct WorldConfig {
                     title: "Click Training 2",
                     description: "Learn the basics by clicking a button again.",
                     view: AnyView(ClickTrainingLevel2 { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                        GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 10, "two": 5, "three": 1],
                     requiredStars: 1,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                        GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -62,20 +50,14 @@ struct WorldConfig {
                     title: "Slide to Send",
                     description: "Send $340.23.",
                     view: AnyView(MoneySliderLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 30, "two": 15, "three": 5],
                     requiredStars: 3,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 // Continue this pattern for all levels...
@@ -84,20 +66,14 @@ struct WorldConfig {
                     title: "Set the Alarm",
                     description: "Set the alarm to 7:30 AM.",
                     view: AnyView(SetAlarmLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 45, "two": 30, "three": 10],
                     requiredStars: 5,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -105,20 +81,14 @@ struct WorldConfig {
                     title: "Delete Comment",
                     description: "Delete your comment on a social media post.",
                     view: AnyView(DeleteCommentLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 60, "two": 30, "three": 5],
                     requiredStars: 10,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -126,20 +96,14 @@ struct WorldConfig {
                     title: "Fill in Date of Birth",
                     description: "Fill in your date of birth.",
                     view: AnyView(DateOfBirthLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 30, "two": 10, "three": 5],
                     requiredStars: 12,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
 //                Level(
@@ -168,20 +132,14 @@ struct WorldConfig {
                     title: "Phone Settings",
                     description: "Turn off bluetooth.",
                     view: AnyView(SettingsMazeLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 30, "two": 20, "three": 10],
                     requiredStars: 16,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -189,20 +147,14 @@ struct WorldConfig {
                     title: "Log In",
                     description: "Login to your social media account.",
                     view: AnyView(OnScreenKeyboardLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 60, "two": 45, "three": 20],
                     requiredStars: 18,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -210,20 +162,14 @@ struct WorldConfig {
                     title: "Crazy Calculator",
                     description: "Calculate some numbers.",
                     view: AnyView(CrazyCalculatorLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 60, "two": 30, "three": 3],
                     requiredStars: 20,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -231,20 +177,14 @@ struct WorldConfig {
                     title: "E-Reader Font",
                     description: "Change the font size on the e-reader.",
                     view: AnyView(FontSizeChallengeLevel { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 90, "two": 60, "three": 30],
                     requiredStars: 35,
                     isLocked: true,
                     mode: "n",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 
@@ -254,20 +194,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Click Training",
                     description: "Learn the basics by clicking a button",
                     view: AnyView(ClickTrainingLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 1],
                     requiredStars: 0,
                     isLocked: false,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -275,20 +209,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Click Training 2",
                     description: "Learn the basics by clicking a button again.",
                     view: AnyView(ClickTrainingLevel2Plus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 2],
                     requiredStars: 1,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -296,20 +224,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Slide to Send",
                     description: "Send $340.23.",
                     view: AnyView(MoneySliderLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 10],
                     requiredStars: 3,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -317,20 +239,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Set the Alarm",
                     description: "Set the alarm to 7:30 AM.",
                     view: AnyView(SetAlarmLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 5],
                     requiredStars: 5,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -338,20 +254,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Delete Comment",
                     description: "Delete your comment on a social media post.",
                     view: AnyView(DeleteCommentLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 5],
                     requiredStars: 7,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -359,20 +269,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Fill in Date of Birth",
                     description: "Fill in your date of birth.",
                     view: AnyView(DateOfBirthLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 10],
                     requiredStars: 11,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
 //                Level(
@@ -401,20 +305,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Phone Settings",
                     description: "Turn off bluetooth.",
                     view: AnyView(SettingsMazeLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 5],
                     requiredStars: 16,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -422,20 +320,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Log In",
                     description: "Login to your social media account.",
                     view: AnyView(OnScreenKeyboardLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 20],
                     requiredStars: 18,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -443,20 +335,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] Crazy Calculator",
                     description: "Calculate some numbers.",
                     view: AnyView(CrazyCalculatorLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 3],
                     requiredStars: 20,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 ),
                 Level(
@@ -464,20 +350,14 @@ struct WorldConfig {
                     title: "[CHALLENGE] E-Reader Font",
                     description: "Change the font size on the e-reader.",
                     view: AnyView(FontSizeChallengeLevelPlus { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }),
                     starThresholds: ["one": 10],
                     requiredStars: 35,
                     isLocked: true,
                     mode: "c",
                     onComplete: { timeElapsed in
-                        GameManager.shared.handleLevelCompletion(
-                            timeElapsed: timeElapsed,
-                            currentLevel: GameManager.shared.currentLevel!
-                        )
+                         GameManager.shared.handleLevelCompletion(timeElapsed: timeElapsed)
                     }
                 )
             ],
